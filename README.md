@@ -18,7 +18,7 @@ En los experimentos de Educación Media y EEB, los modelos no reciben la traducc
 
 Los campos `problem_es`, `expected_answer`, `options` y `correct_option` se usan solo como metadata o para evaluación posterior.
 
-## Prompts Usados
+## Prompts
 
 Los prompts fuente están en [`prompts/guarani_math_prompts.json`](prompts/guarani_math_prompts.json).
 
@@ -30,8 +30,6 @@ También exportamos versiones en Markdown para revisar o compartir:
 | [`prompts/prompts_v4_v7_para_equipo.md`](prompts/prompts_v4_v7_para_equipo.md) | Subconjunto comparativo de prompts `v4` a `v7`. |
 | [`prompts/prompts_eem_eeb.md`](prompts/prompts_eem_eeb.md) | Prompts finales de Educación Media y EEB: `em_v1`, `em_v2`, `v10`, `v11`. |
 | [`prompts/chatgpt_manual_blind_v5.md`](prompts/chatgpt_manual_blind_v5.md) | Prompt para evaluación manual blind con ChatGPT/GPT. |
-
-### Familias De Prompts
 
 | Prompt | Uso | Descripción |
 |---|---|---|
@@ -46,7 +44,7 @@ También exportamos versiones en Markdown para revisar o compartir:
 | `v10` | 3.º grado EEB | Problema en guaraní sin `reasoning_type`. |
 | `v11` | 3.º grado EEB | Problema en guaraní con `reasoning_type`. |
 
-## Modelos Evaluados
+## Modelos 
 
 ### Azure / GuaranIA Chat Completions
 
@@ -91,7 +89,7 @@ También se evaluaron archivos manuales/blind de GPT y Claude/Sonnet, con report
 | GPT | [`reports/gpt/resumen_gpt_v5.md`](reports/gpt/resumen_gpt_v5.md) |
 | Claude/Sonnet | [`reports/claude/resumen_claude_v5.md`](reports/claude/resumen_claude_v5.md) |
 
-## Scripts Principales
+## Scripts 
 
 | Script | Uso |
 |---|---|
@@ -103,7 +101,7 @@ También se evaluaron archivos manuales/blind de GPT y Claude/Sonnet, con report
 | [`evaluate_prompt_results.py`](evaluate_prompt_results.py) | Evaluador general para resultados de primaria/prompts clásicos. |
 | [`evaluate_education_media_results.py`](evaluate_education_media_results.py) | Evaluador flexible para Educación Media y EEB. |
 
-## Reportes Principales
+## Reportes
 
 ### Primaria Y Prompts `v1` A `v9`
 
@@ -174,7 +172,7 @@ Los runners esperan claves de API en variables de entorno o en `.env` local.
 
 Los archivos `.env` no deben subirse al repositorio.
 
-## Notas De Evaluación
+## Notas
 
 La métrica principal es acierto estricto contra `expected_answer`, usualmente comparando `response.final_answer.value`.
 
