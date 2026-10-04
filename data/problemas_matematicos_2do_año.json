@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Ejuhu logaritmo “x” rehegua eiporukuévo propiedades ha ejesareko porã irresúltado calculadorape. x = 21^2 / 25",
+        "problem_es": "Halla el logaritmo de x utilizando las propiedades de los logaritmos y verifica el resultado con la calculadora. x = 21^2 / 25.",
+        "expected_answer": 1.2465,
+        "reasoning_type": "logaritmos",
+        "difficulty": "media"
+    },
+    {
+        "id": 2,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Luisa ha Ramironiko ojapo mbo’ygui ijajúri ha ipyapy jeguakarã. Enero ha febrérope ojapo hikuái mbo’y pe matriz A ha B pe oĩháicha. Ejapo peteĩ matriz ehechauka hag̃ua hembiapokuéra, jeguaka mbo’yguigua, mokõi jasy pukukuépe. A = [[C, P],[50, 15], [47, 36]], B = [[C, P],[72, 25], [34, 12]].",
+        "problem_es": "Luisa y Ramiro elaboran adornos de cuentas para el cuello y la muñeca. En enero y febrero produjeron las cantidades representadas en las matrices A y B, respectivamente. Construye una matriz que represente toda su producción durante los dos meses. A = [[C, P],[50, 15], [47, 36]], B = [[C, P],[72, 25], [34, 12]].",
+        "expected_answer": [
+            [
+                122,
+                40
+            ],
+            [
+                81,
+                48
+            ]
+        ],
+        "reasoning_type": "suma_de_matrices",
+        "difficulty": "media"
+    },
+    {
+        "id": 3,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Eipuru Laplace regla ekalkula hag̃ua determinante ha ejapo peteĩ fila rehegua. |5 1 2; 4 2 3; -2 4 4|",
+        "problem_es": "Utiliza la regla de Laplace para calcular el determinante desarrollando por una fila. |5 1 2; 4 2 3; -2 4 4|",
+        "expected_answer": -2,
+        "reasoning_type": "determinante_regla_de_laplace",
+        "difficulty": "media"
+    },
+    {
+        "id": 4,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Mba’éichapa reikatu rehechauka ecuaciónpe peteĩ circunferencia de centro (-2, -4) ha radio 3√2.",
+        "problem_es": "¿Cómo puedes representar mediante una ecuación una circunferencia de centro (-2, -4) y radio 3√2?",
+        "expected_answer": "(x + 2)^2 + (y + 4)^2 = 18",
+        "reasoning_type": "ecuación_de_circunferencia",
+        "difficulty": "media"
+    },
+    {
+        "id": 5,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Ejuhu ecuación rupive pe circunferencia de centro C (-5, 1) ha irrádiova 7/3 ha egrafika.",
+        "problem_es": "Halla la ecuación de la circunferencia de centro C (-5, 1) y radio 7/3 y grafícala.",
+        "expected_answer": "(x + 5)^2 + (y - 1)^2 = 49/9",
+        "reasoning_type": "ecuación_de_circunferencia",
+        "difficulty": "media"
+    },
+    {
+        "id": 6,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Eheka ecuación rupive peteĩ circunferencia idiámetro oñepyrũva punto (-4, 5) pe ha opáva punto (2, -3) pe ha egrafica.",
+        "problem_es": "Halla la ecuación de una circunferencia cuyo diámetro tiene como extremos los puntos (-4, 5) y (2, -3), y grafícala.",
+        "expected_answer": "(x + 1)^2 + (y - 1)^2 = 25",
+        "reasoning_type": "circunferencia_a_partir_del_diametro",
+        "difficulty": "media"
+    },
+    {
+        "id": 7,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Eheka ha ejuhu ecuación rupive circunferencia de centro rehegua (4, 0) ohasáva umi recta intersección rupi 5x - 7y - 18 = 0 ha 3x + 2y + 14 = 0 ha egrafica rehecha hag̃ua oĩ porãpa.",
+        "problem_es": "Halla la ecuación de la circunferencia de centro (4, 0) que pasa por la intersección de las rectas 5x - 7y - 18 = 0 y 3x + 2y + 14 = 0, y grafícala para comprobar el resultado.",
+        "expected_answer": "(x - 4)^2 + y^2 = 52",
+        "reasoning_type": "interseccion_de_rectas_y_ecuacion_de_circunferencia",
+        "difficulty": "media"
+    },
+    {
+        "id": 8,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Peteĩ parábola idirectrizniko y = 2 ha ifóko katu F (0, -2). Moõitépa opytava’erã pe ivértise.",
+        "problem_es": "Una parábola tiene como directriz y = 2 y como foco F (0, -2). ¿Dónde se encuentra su vértice?",
+        "expected_answer": "(0, 0)",
+        "reasoning_type": "vertice_de_parabola",
+        "difficulty": "media"
+    },
+    {
+        "id": 9,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Eheka mboypahína x eipurukúévo Sarrus método. |1 -1 -1; 10 2x 0; 4 0 1| = 0",
+        "problem_es": "Halla el valor de x utilizando el método de Sarrus. |1 -1 -1; 10 2x 0; 4 0 1| = 0",
+        "expected_answer": -1,
+        "reasoning_type": "determinante_metodo_de_sarrus",
+        "difficulty": "media"
+    },
+    {
+        "id": 10,
+        "grade": "2.º año de la Educación Media",
+        "subject": "Matemática",
+        "source": "Material de Matemática del MEC",
+        "source_type": "MEC Paraguay",
+        "problem_gn": "Ejuhu iséntro ha iráadio ko’ã circunferenciape, ha egrafica. Upéi ikatu reverifika umi gráfika Geogébrape. x² + y² + 12x - 10y + 60 = 0",
+        "problem_es": "Halla el centro y el radio de la circunferencia y grafícala. Luego puedes verificar la gráfica en GeoGebra. x² + y² + 12x - 10y + 60 = 0",
+        "expected_answer": {
+            "center": [
+                -6,
+                5
+            ],
+            "radius": 1
+        },
+        "reasoning_type": "centro_y_radio_de_circunferencia",
+        "difficulty": "media"
+    }
+]

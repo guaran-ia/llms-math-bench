@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "problem": "Jimmy oreko hetave 2$ ombojo'a rire Ethel orekóva viru. Ethel orekórõ 8$, ¿Mboy viru oreko Jimmy?",
+    "expected_answer": 18,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 2,
+    "problem": "Porandu: Olivia oguereko 23$. Ojogua po mbujape he'ẽva 3$ peteĩteĩva. ¿Mboy pirapirépa hemby chupe?.",
+    "expected_answer": 8,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 3,
+    "problem": "Peteĩ yvytu’i puku ou yguasúgui ojaty hag̃ua peteĩ táva. 10 minuto oiporu ojaty hag̃ua 3 milla tavapegua. Táva oñembojasoráramo 42 milla y rembe’y guive pehẽngue py’aguiguáicha peve, mboýpa minuto oiporúta yvytu’i puku ojaty haguã táva opaite?",
+    "expected_answer": 140,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 4,
+    "problem": "Dan oñotỹ 3 rósa máta. Cáda rósa máta 25 irrósa. Cáda rósa 8 hatĩ. Mbovy rósa ratĩpa oĩ?",
+    "expected_answer": 600,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 5,
+    "problem": "Opa  pyhare, Frankie oma'ẽ ta'ãngambyryre  omohu'ã rire hembiaporã. Arakõi ha Arapokõi pyharekue, oma'ẽ peteĩ episodio peteĩ aravo pukúva iprograma oguerohoryvévagui peteĩteĩ pyhare. Arapoteĩme, oma'ẽ heta episodio peteĩ programa 30 aravo'i pukúvagui. Arapo amóime, omohu'ã hembiaporã pya'e ha oma'ẽ peteĩ episodio peteĩ aravo pukúva ha avei peteĩ programa 30 aravo'i pukúva. Arapoteĩme, opyta opáy areve arapokõindy rehehápe ha oma'ẽ mokõi episodio peteĩ aravo pukúva. Ohecháramo 7 aravo televísiõ opaite, mboy episodio 30 aravo'i pukúvapa ohecha Arapoteĩme?",
+    "expected_answer": 3,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 6,
+    "problem": "Kelian oguereko mokõi tembi’u aporã: peteĩ oguereko mokõipa ñe'ẽryru ha mokoiha oguereko joyvy ñe'ẽryru peteĩha. ¿Mboy ñe'ẽryru omoñe'ẽ va'erã Kelian ojapo haguã  mokõi tembi'u ?",
+    "expected_answer": 60,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 7,
+    "problem": "Ary pukukuépe Tom oñotỹ 10 yvyramáta. Mokõi yvyramáta oikytĩ ñavõ ary.\n50 yvyramátagui oñepyrũ. Ohasa rire 10 ary , umi yvyramátagui  30% ipiru. Mboy yvyramátapiko hemby ichupe.",
+    "expected_answer": 91,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 8,
+    "problem": "Jhon ojogua mokõi júnta sapatu mbohapyvéva ita'yra kuéra pe g̃uarã. Ambue oñehepyme'ẽ $60 (poteĩpa) . ¿Mboy ohepyme'ẽ?",
+    "expected_answer": 360,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 9,
+    "problem": "Brandon iPhone itujave irundy jey Ben iPhon-gui. Ben iPhone itujave mokõi jey Suzy iPhone-gui. Suzy iphone oguerekóramo 1 ary, Mboy arýpiko Brandon iphone oguereko",
+    "expected_answer": 8,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 10,
+    "problem": "Raphael oho ojogua mbaʼe oñekotevẽva mbo'ehaópe g̃uarã. Ojogua 4 haiha 1,5$ peteĩteĩva, 2 kuatiahai 4$ peteĩteĩva ha peteĩ aty kuatia bond ohupytýva 20$.  ¿Mboýpa ohupyty Raphael-pe opaite mba'e?",
+    "expected_answer": 34,
+    "difficulty": "fácil"
+  }
+]

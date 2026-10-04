@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "problem": "Los patos de Janet ponen 16 huevos por día. Ella come tres en el desayuno todas las mañanas y usa cuatro para hornear magdalenas para sus amigos todos los días. Vende lo que sobra en el mercado de productores diariamente a $2 el huevo fresco de pato. ¿Cuánto gana en dólares todos los días en el mercado de productores?",
+    "expected_answer": 18,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 2,
+    "problem": "Una bata lleva 2 rollos de tela azul y la mitad de esa cantidad de tela blanca. ¿Cuántos rollos se necesitan en total?",
+    "expected_answer": 3,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 3,
+    "problem": "Josh decide intentar remodelar y vender una casa. Compra una casa de $80 000 y luego agrega $50 000 para las reparaciones. Esto aumenta un 150 % el valor de la casa. ¿Cuánto obtuvo de ganancia?",
+    "expected_answer": 70000,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 4,
+    "problem": "James decide correr 3 carreras de velocidad 3 veces por semana. Corre 60 metros en cada carrera de velocidad. ¿Cuántos metros corre en total por semana?",
+    "expected_answer": 540,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 5,
+    "problem": "Todos los días, Wendi alimenta a cada uno de sus pollos con tres tazas de alimento mixto para pollo que contiene semillas, larvas y verduras para ayudarlos a mantenerse saludables. Alimenta a los pollos en tres comidas separadas. Por la mañana, le da a su bandada de pollos 15 tazas de alimento. Por la tarde, le da otras 25 tazas de alimento. ¿Cuántas tazas de alimento necesita darle a sus pollos en la última comida del día si el tamaño de la bandada de Wendi es de 20 pollos?",
+    "expected_answer": 20,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 6,
+    "problem": "Kylar fue a la tienda a comprar vasos para su nuevo departamento. Un vaso cuesta $5, pero cada segundo vaso cuesta solo el 60 % del precio. Kylar quiere comprar 16 vasos. ¿Cuánto dinero necesita para pagarlos?",
+    "expected_answer": 64,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 7,
+    "problem": "En Toulouse hay el doble de ovejas que en Charleston. En Charleston hay 4 veces más ovejas que en Seattle. ¿Cuántas ovejas hay en total en Toulouse, Charleston y Seattle si en Seattle hay 20 ovejas?",
+    "expected_answer": 260,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 8,
+    "problem": "Carla está descargando un archivo de 200 GB. Por lo general, puede descargar 2 GB por minuto, pero en el 40 % de la descarga, Windows fuerza un reinicio para instalar actualizaciones, lo que demora 20 minutos. Entonces Carla tiene que reiniciar la descarga desde el principio. ¿Cuánto tiempo lleva la descarga del archivo?",
+    "expected_answer": 160,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 9,
+    "problem": "John conduce durante 3 horas a una velocidad de 60 mph y luego da la vuelta porque se da cuenta de que se olvidó algo muy importante en la casa. Intenta volver a la casa en 4 horas, pero pasa las primeras 2 horas en un embotellamiento de tráfico. La siguiente media hora conduce a una velocidad de 30 mph antes de poder conducir el tiempo restante de las 4 horas a 80 mph. ¿A qué distancia de la casa se encuentra al final de esas 4 horas?",
+    "expected_answer": 45,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 10,
+    "problem": "La tarifa de Eliza por hora para las primeras 40 horas de trabajo cada semana es $10. También recibe un pago por horas extras de 1,2 veces su tarifa habitual por hora. ¿Cuánto gana Eliza esta semana si trabajó 45 horas?",
+    "expected_answer": 460,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 11,
+    "problem": "Un programa nuevo tuvo 60 descargas en el primer mes. La cantidad de descargas en el segundo mes fue tres veces más que las descargas en el primer mes, pero luego se redujo un 30 % en el tercer mes. ¿Cuántas descargas tuvo en total el programa durante los tres meses?",
+    "expected_answer": 366,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 12,
+    "problem": "Toula fue a la panadería y compró distintos tipos de pasteles. Compró 3 docenas de donas que cuestan $68 la docena, 2 docenas de mini pastelillos que cuestan $80 la docena y 6 docenas de tortitas de queso a $55 la docena. ¿Cuánto costó todo?",
+    "expected_answer": 694,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 13,
+    "problem": "Carlos planta un limonero. Plantar el árbol le costará $90. Cada año dará 7 limones, que puede vender a $1,5 cada uno. Regar y nutrir el árbol cuesta $3 al año. ¿Cuántos años le llevará comenzar a ganar dinero con el limonero?",
+    "expected_answer": 13,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 14,
+    "problem": "Melanie es vendedora a domicilio. Vendió un tercio de sus aspiradoras en la casa verde, 2 más en la casa roja y la mitad de lo que le quedaba en la casa naranja. Si a Melanie le quedan 5 aspiradoras, ¿cuántas tenía al comienzo?",
+    "expected_answer": 18,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 15,
+    "problem": "En una clase de danza de 20 estudiantes, el 20 % se inscribió en danza contemporánea, el 25 % del resto se inscribió en danza jazz y el resto se inscribió en danza hip-hop. ¿Qué porcentaje del total de los estudiantes se inscribió en danza hip-hop?",
+    "expected_answer": 60,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 16,
+    "problem": "Un comerciante quiere elegir entre 2 planes de compra: joyas por un valor de $5000 o dispositivos electrónicos por un valor de $8000. Su asesor financiero especula con que el mercado de las joyas subirá un 2,5 % mientras que el mercado de los dispositivos electrónicos subirá un 1,2 % en el mismo mes. Si el comerciante quiere elegir una opción que le permita aumentar al máximo la ganancia al final de este mes, ¿de cuánto sería esta ganancia?",
+    "expected_answer": 125,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 17,
+    "problem": "Dos trenes salen de San Rafael a la misma hora. Comienzan a viajar hacia el oeste, ambos recorren 80 millas. Al día siguiente, viajan hacia el norte y recorren 150 milla. ¿Qué distancia recorrió cada tren en los dos días?",
+    "expected_answer": 230,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 18,
+    "problem": "A Jill le pagan $20 la hora por enseñar y $30 por ser entrenadora de porristas. ¿Cuál es su salario anual si trabaja 50 semanas al año, 35 horas a la semana como maestra y 15 horas a la semana como entrenadora?",
+    "expected_answer": 57500,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 19,
+    "problem": "Claire prepara una tortilla de huevos con 3 huevos todas las mañanas para el desayuno. ¿Cuántas docenas de huevo comerá en 4 semanas?",
+    "expected_answer": 7,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 20,
+    "problem": "Marissa sale de excursión por un sendero de 12 millas. Le llevó 1 hora caminar las primeras 4 millas, luego otra hora caminar las siguientes dos millas. Si quiere que su velocidad promedio sea 4 millas por hora, ¿a qué velocidad (en millas por hora) debe caminar el resto de la distancia?",
+    "expected_answer": 6,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 21,
+    "problem": "Tengo 10 litros de refresco de naranja que contienen dos tercios de agua y quiero agregarlo a 15 litros de refresco de piña que contienen tres quintos de agua. Pero al verterlo, derramo un litro de refresco de naranja. ¿Cuánta agua hay en los 24 litros restantes?",
+    "expected_answer": 15,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 22,
+    "problem": "Raymond y Samantha son primos. Raymond nació 6 años antes que Samantha. Raymond tuvo un hijo a los 23 años. Si Samantha ahora tiene 31 años, ¿cuántos años hace que nació el hijo de Raymond?",
+    "expected_answer": 14,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 23,
+    "problem": "Billy vende DVD. El martes recibe 8 clientes. Sus primeros 3 clientes compran un DVD cada uno. Los siguientes 2 clientes compran 2 DVD cada uno. Los últimos 3 clientes no compran ningún DVD. ¿Cuántos DVD vendió Billy el martes?",
+    "expected_answer": 7,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 24,
+    "problem": "Una vela se derrite 2 centímetros cada hora que está encendida. ¿Cuántos centímetros más corta será una vela después de arder de la 1:00 p. m. a las 5:00 p. m.?",
+    "expected_answer": 8,
+    "difficulty": "fácil"
+  },
+  {
+    "id": 25,
+    "problem": "Kyle compró el libro más vendido del año pasado por $19,50. Esto es con un 25 % de descuento del precio original. ¿Cuál era el precio original del libro?",
+    "expected_answer": 26,
+    "difficulty": "fácil"
+  }
+]
