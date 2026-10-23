@@ -1,12 +1,12 @@
-# Resumen nuevos modelos Azure Services
+# New Azure Services Models Summary
 
-Comparación resumida entre los nuevos modelos `gpt-5.6-terra` y `gpt-5.5` contra los modelos Azure/GuaranIA evaluados anteriormente.
+Summary comparison of the new models `gpt-5.6-terra` and `gpt-5.5` against previously evaluated Azure/GuaranIA models.
 
-La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-## Ranking global por mejor prompt
+## Global Ranking by Best Prompt
 
-| Posición | Modelo | Mejor prompt | Aciertos | Exactitud | JSON válido | Latencia media |
+| Rank | Model | Best prompt | Correct answers | Accuracy | Valid JSON | Mean latency |
 |---:|---|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | `v7` | 10/10 | 100.0% | 10/10 | 7.150s |
 | 2 | `gpt-5.6-terra` | `v9` | 9/10 | 90.0% | 0/10 | 3.285s |
@@ -17,16 +17,16 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | 7 | `gpt-4o-mini` | `v7` | 4/10 | 40.0% | 10/10 | 4.678s |
 | 8 | `grok-4-1-fast-non-reasoning` | `v6` | 4/10 | 40.0% | 10/10 | 3.954s |
 
-## Nuevos modelos: resultados por prompt
+## New Models: Results by Prompt
 
-| Modelo | v1 | v2 | v3 | v4 | v5 | v6 | v7 | v8 | v9 | Mejor prompt | Mejor resultado |
+| Model | v1 | v2 | v3 | v4 | v5 | v6 | v7 | v8 | v9 | Best prompt | Best result |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|
 | `gpt-5.5` | 9/10 | 10/10 | 10/10 | 10/10 | 9/10 | 9/10 | 10/10 | 10/10 | 10/10 | `v7` | 10/10 |
 | `gpt-5.6-terra` | 7/10 | 8/10 | 8/10 | 8/10 | 7/10 | 7/10 | 8/10 | 7/10 | 9/10 | `v9` | 9/10 |
 
-## Comparación resumida contra modelos existentes
+## Summary Comparison with Existing Models
 
-| Modelo | v1 | v2 | v3 | v4 | v5 | v6 | v7 | v8 | v9 | Mejor prompt | Mejor resultado |
+| Model | v1 | v2 | v3 | v4 | v5 | v6 | v7 | v8 | v9 | Best prompt | Best result |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---:|
 | `gpt-5.5` | 9/10 | 10/10 | 10/10 | 10/10 | 9/10 | 9/10 | 10/10 | 10/10 | 10/10 | `v7` | 10/10 |
 | `gpt-5.6-terra` | 7/10 | 8/10 | 8/10 | 8/10 | 7/10 | 7/10 | 8/10 | 7/10 | 9/10 | `v9` | 9/10 |
@@ -37,13 +37,13 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `gpt-4o-mini` | - | - | - | 3/10 | 2/10 | 2/10 | 4/10 | 2/10 | 3/10 | `v7` | 4/10 |
 | `grok-4-1-fast-non-reasoning` | - | - | - | 0/10 | 2/10 | 4/10 | 4/10 | 1/10 | 1/10 | `v6` | 4/10 |
 
-## Errores del mejor prompt por modelo nuevo
+## Errors with the Best Prompt for Each New Model
 
-| Modelo | Mejor prompt | Errores |
+| Model | Best prompt | Errors |
 |---|---|---|
-| `gpt-5.5` | `v7` | ninguno |
+| `gpt-5.5` | `v7` | none |
 | `gpt-5.6-terra` | `v9` | P1 (18 -> 10) |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado global ahora es `gpt-5.5` con `v7`: 10/10.
+The best overall result is now `gpt-5.5` with `v7`: 10/10.

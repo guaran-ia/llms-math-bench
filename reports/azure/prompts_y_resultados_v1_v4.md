@@ -1,73 +1,75 @@
-# Prompts y resultados v1 a v4
+# Prompts and Results v1 to v4
 
-Evaluación sobre 10 problemas matemáticos en guaraní y 6 modelos. La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+> Prompt instructions are translated into English for reference. The original experimental prompts remain in `guarani_math_prompts.json` in the prompts directory. Guaraní text and literal model outputs are preserved.
 
-## Prueba v1
+Evaluation of 10 mathematical problems in Guaraní across 6 models. The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-### Prompt usado
+## Test v1
+
+### Prompt Used
 
 ```text
-Eres un profesor de matemáticas de primaria. Tu tarea es resolver y explicar un problema matemático para un niño de 7 años.
+You are a primary school mathematics teacher. Your task is to solve and explain a mathematical problem for a 7-year-old child.
 
-Debes utilizar palabras sencillas, oraciones cortas y operaciones fáciles de seguir. La explicación no puede ser técnica ni complicada.
+You must use simple words, short sentences, and operations that are easy to follow. The explanation must not be technical or complicated.
 
-Resuelve el problema y genera tres opciones de respuesta:
+Solve the problem and generate three answer options:
 
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Explica brevemente cómo llegaste a la respuesta.
-* Divide la solución en pasos simples.
-* Devuelve exclusivamente un JSON válido.
-* No agregues texto antes ni después del JSON.
-* No utilices bloques Markdown.
-* Las respuesta deben estar en guarani.
-* Las opciones deben estar en guarani.
-* La explicación debe estar en guarani.
-* No puedes utilizar el español ni ningún otro idioma que no sea el guaraní.
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Briefly explain how you arrived at the answer.
+* Break the solution into simple steps.
+* Return only valid JSON.
+* Do not add any text before or after the JSON.
+* Do not use Markdown blocks.
+* Answers must be in Guaraní.
+* Options must be in Guaraní.
+* The explanation must be in Guaraní.
+* You must not use Spanish or any language other than Guaraní.
 
-Utiliza exactamente esta estructura:
+Use exactly this structure:
 
 {
-"reasoning": "Explicación breve y sencilla para un niño de 7 años.",
+"reasoning": "A brief, simple explanation for a 7-year-old child.",
 "steps": [
-"Primer paso explicado de manera sencilla.",
-"Segundo paso explicado de manera sencilla."
+"First step explained simply.",
+"Second step explained simply."
 ],
 "final_answer": {
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 },
 "options": [
 {
 "id": "A",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 },
 {
 "id": "B",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 },
 {
 "id": "C",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 }
 ],
 "correct_option_id": "A"
 }
 
-Problema:
+Problem:
 
 {problem}
 ```
 
-### Resultado de los modelos
+### Model Results
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-4.1` | 6/10 | 60.0% | 10/10 | 3.583s |
 | 2 | `gpt-5.4-mini` | 5/10 | 50.0% | 10/10 | 3.089s |
@@ -76,43 +78,43 @@ Problema:
 | 5 | `grok-4-1-fast-non-reasoning` | 3/10 | 30.0% | 10/10 | 3.640s |
 | 6 | `gpt-4o-mini` | 2/10 | 20.0% | 10/10 | 3.038s |
 
-## Prueba v2
+## Test v2
 
-### Prompt usado
+### Prompt Used
 
 ```text
-Eres un profesor de matemáticas de primaria y también traductor entre guaraní y español.
+You are a primary school mathematics teacher and also a translator between Guaraní and Spanish.
 
-Recibirás un problema matemático escrito en guaraní.
+You will receive a mathematical problem written in Guaraní.
 
-Para resolverlo, sigue este proceso interno:
-1. Traduce mentalmente el problema al español.
-2. Resuelve el problema en español paso a paso.
-3. Genera tres opciones de respuesta en español.
-4. Traduce la explicación, los pasos, la unidad y las opciones al guaraní.
-5. Devuelve solo el JSON final en guaraní.
+To solve it, follow this internal process:
+1. Mentally translate the problem into Spanish.
+2. Solve the problem in Spanish step by step.
+3. Generate three answer options in Spanish.
+4. Translate the explanation, steps, unit, and options into Guaraní.
+5. Return only the final JSON in Guaraní.
 
-No muestres la traducción al español.
-No muestres el razonamiento en español.
-No agregues texto antes ni después del JSON.
-No uses bloques Markdown.
+Do not show the Spanish translation.
+Do not show reasoning in Spanish.
+Do not add any text before or after the JSON.
+Do not use Markdown blocks.
 
-Reglas:
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Usa palabras sencillas y oraciones cortas, como para un niño de 7 años.
-* Divide la solución final en pasos simples.
-* La explicación final debe estar en guaraní.
-* Los pasos finales deben estar en guaraní.
-* Las unidades finales deben estar en guaraní.
-* Las opciones finales deben estar en guaraní.
-* El JSON debe ser válido.
-* Antes de responder, verifica que final_answer.value sea igual al valor de la opción indicada por correct_option_id.
+Rules:
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Use simple words and short sentences, as if speaking to a 7-year-old child.
+* Break the final solution into simple steps.
+* The final explanation must be in Guaraní.
+* The final steps must be in Guaraní.
+* The final units must be in Guaraní.
+* The final options must be in Guaraní.
+* The JSON must be valid.
+* Before responding, check that final_answer.value equals the value of the option indicated by correct_option_id.
 
-Utiliza exactamente esta estructura:
+Use exactly this structure:
 
 {
 "reasoning": "Ñemyesakã mbyky ha ndahasýiva mitãme g̃uarã.",
@@ -144,14 +146,14 @@ Utiliza exactamente esta estructura:
 "correct_option_id": "A"
 }
 
-Problema en guaraní:
+Problem in Guaraní:
 
 {problem}
 ```
 
-### Resultado de los modelos
+### Model Results
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-4.1` | 5/10 | 50.0% | 10/10 | 2.791s |
 | 2 | `Mistral-Large-3` | 5/10 | 50.0% | 10/10 | 5.099s |
@@ -160,39 +162,39 @@ Problema en guaraní:
 | 5 | `gpt-4o-mini` | 2/10 | 20.0% | 10/10 | 3.025s |
 | 6 | `grok-4-1-fast-non-reasoning` | 2/10 | 20.0% | 9/10 | 13.146s |
 
-## Prueba v3
+## Test v3
 
-### Prompt usado
+### Prompt Used
 
 ```text
-Eres un profesor de matemáticas de primaria que sabe guaraní y español.
+You are a primary school mathematics teacher who knows Guaraní and Spanish.
 
-Recibirás un problema matemático escrito en guaraní.
+You will receive a mathematical problem written in Guaraní.
 
-Tu primera tarea es encontrarle sentido al problema. Lee con cuidado el enunciado, identifica las cantidades importantes y entiende qué se está preguntando. Después resuelve el problema con operaciones simples.
+Your first task is to make sense of the problem. Read the statement carefully, identify the important quantities, and understand what is being asked. Then solve the problem using simple operations.
 
-No traduzcas literalmente palabra por palabra si eso hace que el problema pierda sentido. Usa tu conocimiento de guaraní y español para entender la idea matemática del enunciado.
+Do not translate literally word for word if doing so makes the problem lose its meaning. Use your knowledge of Guaraní and Spanish to understand the mathematical idea in the statement.
 
-No muestres tu análisis interno.
-No agregues texto antes ni después del JSON.
-No uses bloques Markdown.
+Do not show your internal analysis.
+Do not add any text before or after the JSON.
+Do not use Markdown blocks.
 
-Reglas:
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Usa palabras sencillas y oraciones cortas, como para un niño de 7 años.
-* Divide la solución final en pasos simples.
-* La explicación final debe estar en guaraní.
-* Los pasos finales deben estar en guaraní.
-* Las unidades finales deben estar en guaraní.
-* Las opciones finales deben estar en guaraní.
-* El JSON debe ser válido.
-* Antes de responder, verifica que final_answer.value sea igual al valor de la opción indicada por correct_option_id.
+Rules:
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Use simple words and short sentences, as if speaking to a 7-year-old child.
+* Break the final solution into simple steps.
+* The final explanation must be in Guaraní.
+* The final steps must be in Guaraní.
+* The final units must be in Guaraní.
+* The final options must be in Guaraní.
+* The JSON must be valid.
+* Before responding, check that final_answer.value equals the value of the option indicated by correct_option_id.
 
-Utiliza exactamente esta estructura:
+Use exactly this structure:
 
 {
 "reasoning": "Ñemyesakã mbyky ha ndahasýiva mitãme g̃uarã.",
@@ -224,14 +226,14 @@ Utiliza exactamente esta estructura:
 "correct_option_id": "A"
 }
 
-Problema en guaraní:
+Problem in Guaraní:
 
 {problem}
 ```
 
-### Resultado de los modelos
+### Model Results
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.4-mini` | 6/10 | 60.0% | 10/10 | 2.934s |
 | 2 | `Llama-3.3-70B-Instruct` | 5/10 | 50.0% | 10/10 | 2.449s |
@@ -240,20 +242,20 @@ Problema en guaraní:
 | 5 | `gpt-4o-mini` | 2/10 | 20.0% | 10/10 | 2.474s |
 | 6 | `grok-4-1-fast-non-reasoning` | 1/10 | 10.0% | 10/10 | 36.437s |
 
-## Prueba v4
+## Test v4
 
-### Prompt usado
+### Prompt Used
 
 ```text
-Eres un profesor de matemáticas de primaria que sabe guaraní y español.
+You are a primary school mathematics teacher who knows Guaraní and Spanish.
 
-Recibirás un problema matemático escrito en guaraní.
+You will receive a mathematical problem written in Guaraní.
 
-Tu primera tarea es encontrarle sentido al problema. Lee con cuidado el enunciado, identifica las cantidades importantes y entiende qué se está preguntando. Después resuelve el problema con operaciones simples.
+Your first task is to make sense of the problem. Read the statement carefully, identify the important quantities, and understand what is being asked. Then solve the problem using simple operations.
 
-No traduzcas literalmente palabra por palabra si eso hace que el problema pierda sentido. Usa tu conocimiento de guaraní y español para entender la idea matemática del enunciado.
+Do not translate literally word for word if doing so makes the problem lose its meaning. Use your knowledge of Guaraní and Spanish to understand the mathematical idea in the statement.
 
-Ayuda para interpretar números y expresiones frecuentes en guaraní:
+Help with interpreting common numbers and expressions in Guaraní:
 * peteĩ = 1
 * mokõi = 2
 * mbohapy = 3
@@ -261,40 +263,40 @@ Ayuda para interpretar números y expresiones frecuentes en guaraní:
 * po = 5
 * poteĩpa = 60
 * mokõipa = 20
-* mokõi jey = dos veces
-* irundy jey = cuatro veces
-* peteĩteĩ = cada uno
-* ñavõ = cada
-* hetave = más que
-* hemby = sobra o queda
+* mokõi jey = twice
+* irundy jey = four times
+* peteĩteĩ = each one
+* ñavõ = each
+* hetave = more than
+* hemby = left over or remaining
 
-Antes de responder, revisa internamente:
-1. Qué cantidad representa cada número del problema.
-2. Qué significa cada unidad.
-3. Qué operación corresponde.
-4. Si usaste todos los datos importantes del enunciado.
-5. Si final_answer.value coincide con el valor de la opción indicada por correct_option_id.
+Before responding, check internally:
+1. What quantity each number in the problem represents.
+2. What each unit means.
+3. Which operation is appropriate.
+4. Whether you used all the important information in the statement.
+5. Whether final_answer.value matches the value of the option indicated by correct_option_id.
 
-No muestres tu análisis interno.
-No agregues texto antes ni después del JSON.
-No uses bloques Markdown.
+Do not show your internal analysis.
+Do not add any text before or after the JSON.
+Do not use Markdown blocks.
 
-Reglas:
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Usa palabras sencillas y oraciones cortas, como para un niño de 7 años.
-* Divide la solución final en pasos simples.
-* La explicación final debe estar en guaraní.
-* Los pasos finales deben estar en guaraní.
-* Las unidades finales deben estar en guaraní.
-* Las opciones finales deben estar en guaraní.
-* El JSON debe ser válido.
-* Antes de responder, verifica que final_answer.value sea igual al valor de la opción indicada por correct_option_id.
+Rules:
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Use simple words and short sentences, as if speaking to a 7-year-old child.
+* Break the final solution into simple steps.
+* The final explanation must be in Guaraní.
+* The final steps must be in Guaraní.
+* The final units must be in Guaraní.
+* The final options must be in Guaraní.
+* The JSON must be valid.
+* Before responding, check that final_answer.value equals the value of the option indicated by correct_option_id.
 
-Utiliza exactamente esta estructura:
+Use exactly this structure:
 
 {
 "reasoning": "Ñemyesakã mbyky ha ndahasýiva mitãme g̃uarã.",
@@ -326,14 +328,14 @@ Utiliza exactamente esta estructura:
 "correct_option_id": "A"
 }
 
-Problema en guaraní:
+Problem in Guaraní:
 
 {problem}
 ```
 
-### Resultado de los modelos
+### Model Results
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.4-mini` | 6/10 | 60.0% | 10/10 | 2.934s |
 | 2 | `gpt-4.1` | 5/10 | 50.0% | 10/10 | 4.031s |
@@ -342,9 +344,9 @@ Problema en guaraní:
 | 5 | `gpt-4o-mini` | 3/10 | 30.0% | 10/10 | 2.932s |
 | 6 | `grok-4-1-fast-non-reasoning` | 0/10 | 0.0% | 6/10 | 31.346s |
 
-## Comparación final
+## Final Comparison
 
-| Modelo | v1 | v2 | v3 | v4 | Mejor resultado |
+| Model | v1 | v2 | v3 | v4 | Best result |
 |---|---:|---:|---:|---:|---:|
 | `gpt-4.1` | 6/10 | 5/10 | 5/10 | 5/10 | 6/10 |
 | `gpt-5.4-mini` | 5/10 | 4/10 | 6/10 | 6/10 | 6/10 |
@@ -353,8 +355,8 @@ Problema en guaraní:
 | `grok-4-1-fast-non-reasoning` | 3/10 | 2/10 | 1/10 | 0/10 | 3/10 |
 | `gpt-4o-mini` | 2/10 | 2/10 | 2/10 | 3/10 | 3/10 |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado absoluto fue 6/10. Lo alcanzaron `gpt-4.1` con v1 y `gpt-5.4-mini` con v3 y v4.
+The best absolute result was 6/10. It was achieved by `gpt-4.1` with v1 and `gpt-5.4-mini` with v3 and v4.
 
-El prompt v3 es el mejor candidato general: conserva el máximo de 6/10, mantiene buen desempeño en `Llama-3.3-70B-Instruct` y evita el deterioro fuerte que v4 causó en `grok-4-1-fast-non-reasoning`.
+Prompt v3 is the best overall candidate: it retains the maximum of 6/10, maintains good performance with `Llama-3.3-70B-Instruct`, and avoids the sharp decline that v4 caused for `grok-4-1-fast-non-reasoning`.

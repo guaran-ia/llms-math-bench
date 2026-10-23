@@ -1,8 +1,8 @@
-# Resumen Gemini v1 a v5
+# Gemini Summary v1 to v5
 
-## Comparación final
+## Final Comparison
 
-| Modelo | v1 | v2 | v3 | v4 | v5 | Mejor resultado |
+| Model | v1 | v2 | v3 | v4 | v5 | Best result |
 |---|---:|---:|---:|---:|---:|---:|
 | `gemini-3.5-flash` | 9/10 | 9/10 | 9/10 | 10/10 | 8/10 | 10/10 |
 | `gemini-3.1-pro-preview` | 9/10 | 8/10 | 8/10 | 8/10 | 10/10 | 10/10 |
@@ -10,9 +10,9 @@
 | `gemini-3.1-flash-lite` | 5/10 | 5/10 | 6/10 | 5/10 | 5/10 | 6/10 |
 | `gemini-3.5-live-translate-preview` | 0/10 | 0/10 | 0/10 | 0/10 | 0/10 | 0/10 |
 
-## Ranking global
+## Global Ranking
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gemini-3.5-flash` | 10/10 | 100.0% | 10/10 | 10.360s |
 | 2 | `gemini-3.1-pro-preview` | 10/10 | 100.0% | 10/10 | 22.127s |

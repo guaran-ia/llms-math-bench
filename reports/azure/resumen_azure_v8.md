@@ -1,12 +1,12 @@
-# Resumen Azure v8
+# Azure Summary v8
 
-Todas las corridas fueron evaluadas con el prompt `v8` (`Autocomplete simple zero-shot`).
+All runs were evaluated with prompt `v8` (`Simple zero-shot autocomplete`).
 
-La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-## Comparación de modelos
+## Model Comparison
 
-| Modelo | Aciertos | Exactitud | JSON válido | Opción consistente | Latencia media | Errores |
+| Model | Correct answers | Accuracy | Valid JSON | Consistent option | Mean latency | Errors |
 |---|---:|---:|---:|---:|---:|---|
 | `gpt-4.1` | 4/10 | 40.0% | 0/10 | 0/10 | 2.146s | P1 (18 -> 10), P5 (3 -> 8), P6 (60 -> 90), P7 (91 -> 37), P8 (360 -> 120), P9 (8 -> 5) |
 | `gpt-5.4-mini` | 3/10 | 30.0% | 0/10 | 0/10 | 2.205s | P1 (18 -> 10), P2 (8 -> 14), P5 (3 -> 14), P6 (60 -> 20300), P7 (91 -> 49), P8 (360 -> 30), P9 (8 -> 4) |
@@ -15,9 +15,9 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `Mistral-Large-3` | 1/10 | 10.0% | 0/10 | 0/10 | 0.621s | P1 (18 -> 10), P2 (8 -> 7), P3 (140 -> 420), P5 (3 -> 120), P6 (60 -> 5), P7 (91 -> 4), P8 (360 -> 120), P9 (8 -> 3), P10 (34 -> 38) |
 | `grok-4-1-fast-non-reasoning` | 1/10 | 10.0% | 0/10 | 0/10 | 0.900s | P1 (18 -> 6), P2 (8 -> 20), P3 (140 -> 8), P5 (3 -> 70), P6 (60 -> 5), P7 (91 -> 80), P8 (360 -> 60), P9 (8 -> 2), P10 (34 -> 36) |
 
-## Ranking global
+## Global Ranking
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-4.1` | 4/10 | 40.0% | 0/10 | 2.146s |
 | 2 | `gpt-5.4-mini` | 3/10 | 30.0% | 0/10 | 2.205s |
@@ -26,9 +26,9 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | 5 | `Mistral-Large-3` | 1/10 | 10.0% | 0/10 | 0.621s |
 | 6 | `grok-4-1-fast-non-reasoning` | 1/10 | 10.0% | 0/10 | 0.900s |
 
-## Detalle de errores
+## Error Details
 
-| Modelo | Problema | Esperado | Predicho | JSON válido |
+| Model | Problem | Expected | Predicted | Valid JSON |
 |---|---:|---:|---:|---|
 | `gpt-4.1` | 1 | 18 | 10 | no |
 | `gpt-4.1` | 5 | 3 | 8 | no |
@@ -78,6 +78,6 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `grok-4-1-fast-non-reasoning` | 9 | 8 | 2 | no |
 | `grok-4-1-fast-non-reasoning` | 10 | 34 | 36 | no |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado fue `gpt-4.1` con 4/10.
+The best result was `gpt-4.1` at 4/10.

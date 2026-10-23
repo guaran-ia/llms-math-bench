@@ -1,10 +1,10 @@
-# Comparación Azure v4 vs v7
+# Azure v4 vs v7 Comparison
 
-La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-## Resumen por modelo
+## Summary by Model
 
-| Modelo | v4 | v7 | Delta | JSON v4 | JSON v7 | Latencia v4 | Latencia v7 |
+| Model | v4 | v7 | Delta | JSON v4 | JSON v7 | Latency v4 | Latency v7 |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `grok-4-1-fast-non-reasoning` | 0/10 | 4/10 | +4 | 6/10 | 10/10 | 31.346s | 4.945s |
 | `Mistral-Large-3` | 4/10 | 5/10 | +1 | 10/10 | 10/10 | 5.636s | 13.063s |
@@ -15,7 +15,7 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 
 ## Ranking v7
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.4-mini` | 5/10 | 50.0% | 10/10 | 3.780s |
 | 2 | `Mistral-Large-3` | 5/10 | 50.0% | 10/10 | 13.063s |
@@ -24,9 +24,9 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | 5 | `grok-4-1-fast-non-reasoning` | 4/10 | 40.0% | 10/10 | 4.945s |
 | 6 | `gpt-4.1` | 4/10 | 40.0% | 9/10 | 3.698s |
 
-## Cambios por problema
+## Per-Problem Changes
 
-| Modelo | Mejoró en v7 | Empeoró en v7 | Errores v7 |
+| Model | Improved in v7 | Worsened in v7 | Errors v7 |
 |---|---|---|---|
 | `grok-4-1-fast-non-reasoning` | P2, P3, P4, P10 | - | P1 (18 -> 10), P5 (3 -> 217), P6 (60 -> 32), P7 (91 -> 15), P8 (360 -> 180), P9 (8 -> 5) |
 | `Mistral-Large-3` | P2 | - | P1 (18 -> 10), P5 (3 -> 11), P6 (60 -> 8), P7 (91 -> 35), P8 (360 -> 120) |
@@ -35,6 +35,6 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `gpt-5.4-mini` | - | P6 | P1 (18 -> 10), P5 (3 -> 5), P6 (60 -> 420), P7 (91 -> 49), P8 (360 -> 120) |
 | `gpt-4.1` | P7 | P9, P10 | P1 (18 -> 10), P5 (3 -> 10), P6 (60 -> 21), P8 (360 -> 120), P9 (8 -> 4), P10 (34 -> None) |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado en `v7` fue `gpt-5.4-mini` con 5/10.
+The best result with `v7` was `gpt-5.4-mini` at 5/10.

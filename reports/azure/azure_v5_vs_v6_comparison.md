@@ -1,10 +1,10 @@
-# Comparación Azure v5 vs v6
+# Azure v5 vs v6 Comparison
 
-La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-## Resumen por modelo
+## Summary by Model
 
-| Modelo | v5 | v6 | Delta | JSON v5 | JSON v6 | Latencia v5 | Latencia v6 |
+| Model | v5 | v6 | Delta | JSON v5 | JSON v6 | Latency v5 | Latency v6 |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `grok-4-1-fast-non-reasoning` | 2/10 | 4/10 | +2 | 9/10 | 10/10 | 4.815s | 3.954s |
 | `Llama-3.3-70B-Instruct` | 4/10 | 5/10 | +1 | 10/10 | 10/10 | 2.500s | 3.345s |
@@ -15,7 +15,7 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 
 ## Ranking v6
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | JSON válido | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Valid JSON | Mean latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `Llama-3.3-70B-Instruct` | 5/10 | 50.0% | 10/10 | 3.345s |
 | 2 | `gpt-5.4-mini` | 5/10 | 50.0% | 10/10 | 3.577s |
@@ -24,9 +24,9 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | 5 | `gpt-4o-mini` | 2/10 | 20.0% | 10/10 | 3.238s |
 | 6 | `Mistral-Large-3` | 0/10 | 0.0% | 0/10 | 4.606s |
 
-## Cambios por problema
+## Per-Problem Changes
 
-| Modelo | Mejoró en v6 | Empeoró en v6 | Errores v6 |
+| Model | Improved in v6 | Worsened in v6 | Errors v6 |
 |---|---|---|---|
 | `grok-4-1-fast-non-reasoning` | P2, P3 | - | P1 (18 -> 6), P5 (3 -> 210), P6 (60 -> 2), P7 (91 -> 25), P8 (360 -> 180), P9 (8 -> 1) |
 | `Llama-3.3-70B-Instruct` | P2 | - | P1 (18 -> 10), P5 (3 -> 1), P6 (60 -> 3), P7 (91 -> 45), P8 (360 -> 30) |
@@ -35,6 +35,6 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `Mistral-Large-3` | - | - | P1 (18 -> 10), P2 (8 -> 8), P3 (140 -> 140), P4 (600 -> 600), P5 (3 -> 33), P6 (60 -> 4), P7 (91 -> 45), P8 (360 -> 120), P9 (8 -> 7), P10 (34 -> 34) |
 | `gpt-4.1` | - | P9 | P1 (18 -> 10), P5 (3 -> 10), P6 (60 -> 28), P7 (91 -> 28), P8 (360 -> 120), P9 (8 -> 7) |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado en `v6` fue `Llama-3.3-70B-Instruct` con 5/10.
+The best result with `v6` was `Llama-3.3-70B-Instruct` at 5/10.

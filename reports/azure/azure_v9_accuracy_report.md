@@ -1,27 +1,27 @@
-# Reporte de prompts por modelo
+# Prompt Accuracy Report by Model
 
-## Resumen
+## Summary
 
-- Archivo evaluado: `model_test_results_azure_v9.jsonl`
-- Intentos leídos: 60
-- Intentos evaluados para ranking: 60
-- Líneas JSONL inválidas: 0
-- Mejor combinación: **azure / Llama-3.3-70B-Instruct / v9** (3/10)
+- Evaluated file: `model_test_results_azure_v9.jsonl`
+- Attempts read: 60
+- Attempts evaluated for ranking: 60
+- Invalid JSONL lines: 0
+- Best combination: **azure / Llama-3.3-70B-Instruct / v9** (3/10)
 
-## Ranking Por Prompt
+## Ranking by Prompt
 
-| Posición | Proveedor | Modelo | Prompt | Nombre | Aciertos | Exactitud | JSON válido | Opción consistente | Errores API | Errores JSON | Latencia media |
+| Rank | Provider | Model | Prompt | Name | Correct answers | Accuracy | Valid JSON | Consistent option | API errors | JSON errors | Mean latency |
 |---:|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| 1 | azure | Llama-3.3-70B-Instruct | v9 | Autocomplete simple few-shot | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 0.604s |
-| 2 | azure | Mistral-Large-3 | v9 | Autocomplete simple few-shot | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 0.736s |
-| 3 | azure | gpt-4o-mini | v9 | Autocomplete simple few-shot | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 1 | 0.991s |
-| 4 | azure | gpt-4.1 | v9 | Autocomplete simple few-shot | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 1.219s |
-| 5 | azure | gpt-5.4-mini | v9 | Autocomplete simple few-shot | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 1.435s |
-| 6 | azure | grok-4-1-fast-non-reasoning | v9 | Autocomplete simple few-shot | 1/10 | 10.0% | 0/10 | 0/10 | 0 | 0 | 0.637s |
+| 1 | azure | Llama-3.3-70B-Instruct | v9 | Simple few-shot autocomplete | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 0.604s |
+| 2 | azure | Mistral-Large-3 | v9 | Simple few-shot autocomplete | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 0.736s |
+| 3 | azure | gpt-4o-mini | v9 | Simple few-shot autocomplete | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 1 | 0.991s |
+| 4 | azure | gpt-4.1 | v9 | Simple few-shot autocomplete | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 1.219s |
+| 5 | azure | gpt-5.4-mini | v9 | Simple few-shot autocomplete | 3/10 | 30.0% | 0/10 | 0/10 | 0 | 0 | 1.435s |
+| 6 | azure | grok-4-1-fast-non-reasoning | v9 | Simple few-shot autocomplete | 1/10 | 10.0% | 0/10 | 0/10 | 0 | 0 | 0.637s |
 
-## Detalle Por Problema
+## Per-Problem Details
 
-| Prompt | Problema | Modelo | Esperado | Predicho | Correcto | JSON válido | Línea |
+| Prompt | Problem | Model | Expected | Predicted | Correct | Valid JSON | Line |
 |---|---:|---|---:|---:|---|---|---:|
 | v9 | 1 | Llama-3.3-70B-Instruct | 18 | 10 | no | no | 6 |
 | v9 | 1 | Mistral-Large-3 | 18 | 10 | no | no | 5 |
@@ -29,23 +29,23 @@
 | v9 | 1 | gpt-4o-mini | 18 | 6 | no | no | 3 |
 | v9 | 1 | gpt-5.4-mini | 18 | 10 | no | no | 1 |
 | v9 | 1 | grok-4-1-fast-non-reasoning | 18 | 12 | no | no | 4 |
-| v9 | 2 | Llama-3.3-70B-Instruct | 8 | 8 | sí | no | 12 |
-| v9 | 2 | Mistral-Large-3 | 8 | 8 | sí | no | 11 |
-| v9 | 2 | gpt-4.1 | 8 | 8 | sí | no | 8 |
-| v9 | 2 | gpt-4o-mini | 8 | 8 | sí | no | 9 |
-| v9 | 2 | gpt-5.4-mini | 8 | 8 | sí | no | 7 |
-| v9 | 2 | grok-4-1-fast-non-reasoning | 8 | 8 | sí | no | 10 |
-| v9 | 3 | Llama-3.3-70B-Instruct | 140 | 140 | sí | no | 18 |
-| v9 | 3 | Mistral-Large-3 | 140 | 140 | sí | no | 17 |
-| v9 | 3 | gpt-4.1 | 140 | 140 | sí | no | 14 |
-| v9 | 3 | gpt-4o-mini | 140 | 140 | sí | no | 15 |
-| v9 | 3 | gpt-5.4-mini | 140 | 140 | sí | no | 13 |
+| v9 | 2 | Llama-3.3-70B-Instruct | 8 | 8 | yes | no | 12 |
+| v9 | 2 | Mistral-Large-3 | 8 | 8 | yes | no | 11 |
+| v9 | 2 | gpt-4.1 | 8 | 8 | yes | no | 8 |
+| v9 | 2 | gpt-4o-mini | 8 | 8 | yes | no | 9 |
+| v9 | 2 | gpt-5.4-mini | 8 | 8 | yes | no | 7 |
+| v9 | 2 | grok-4-1-fast-non-reasoning | 8 | 8 | yes | no | 10 |
+| v9 | 3 | Llama-3.3-70B-Instruct | 140 | 140 | yes | no | 18 |
+| v9 | 3 | Mistral-Large-3 | 140 | 140 | yes | no | 17 |
+| v9 | 3 | gpt-4.1 | 140 | 140 | yes | no | 14 |
+| v9 | 3 | gpt-4o-mini | 140 | 140 | yes | no | 15 |
+| v9 | 3 | gpt-5.4-mini | 140 | 140 | yes | no | 13 |
 | v9 | 3 | grok-4-1-fast-non-reasoning | 140 | 28 | no | no | 16 |
-| v9 | 4 | Llama-3.3-70B-Instruct | 600 | 600 | sí | no | 24 |
-| v9 | 4 | Mistral-Large-3 | 600 | 600 | sí | no | 23 |
-| v9 | 4 | gpt-4.1 | 600 | 600 | sí | no | 20 |
+| v9 | 4 | Llama-3.3-70B-Instruct | 600 | 600 | yes | no | 24 |
+| v9 | 4 | Mistral-Large-3 | 600 | 600 | yes | no | 23 |
+| v9 | 4 | gpt-4.1 | 600 | 600 | yes | no | 20 |
 | v9 | 4 | gpt-4o-mini | 600 | 17 | no | no | 21 |
-| v9 | 4 | gpt-5.4-mini | 600 | 600 | sí | no | 19 |
+| v9 | 4 | gpt-5.4-mini | 600 | 600 | yes | no | 19 |
 | v9 | 4 | grok-4-1-fast-non-reasoning | 600 | 64 | no | no | 22 |
 | v9 | 5 | Llama-3.3-70B-Instruct | 3 | 2 | no | no | 30 |
 | v9 | 5 | Mistral-Large-3 | 3 | 10 | no | no | 29 |
@@ -80,6 +80,6 @@
 | v9 | 10 | Llama-3.3-70B-Instruct | 34 | 32 | no | no | 60 |
 | v9 | 10 | Mistral-Large-3 | 34 | 29.5 | no | no | 59 |
 | v9 | 10 | gpt-4.1 | 34 | 35 | no | no | 56 |
-| v9 | 10 | gpt-4o-mini | 34 | 34 | sí | no | 57 |
+| v9 | 10 | gpt-4o-mini | 34 | 34 | yes | no | 57 |
 | v9 | 10 | gpt-5.4-mini | 34 | 32 | no | no | 55 |
 | v9 | 10 | grok-4-1-fast-non-reasoning | 34 | 17 | no | no | 58 |

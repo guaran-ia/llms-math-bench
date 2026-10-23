@@ -1,23 +1,23 @@
-# Comparación Azure v4 a v9
+# Azure v4 to v9 Comparison
 
-Resumen simple de modelos Azure/GuaranIA anteriores y nuevos (`gpt-5.6-terra`, `gpt-5.5`).
+Simple summary of existing and new Azure/GuaranIA models (`gpt-5.6-terra`, `gpt-5.5`).
 
-Métrica principal: `response.final_answer.value == expected_answer`.
+Main metric: `response.final_answer.value == expected_answer`.
 
-## Resumen de prompts
+## Prompt Summary
 
-| Prompt | Resumen |
+| Prompt | Summary |
 |---|---|
-| `v4` | Profesor bilingüe con glosario guaraní-español. |
-| `v5` | Guaraní estricto con reglas reforzadas de JSON. |
-| `v6` | v5 con warmup/few-shot matemático. |
-| `v7` | v4 con warmup/few-shot matemático. |
-| `v8` | Autocomplete simple zero-shot; solo resultado numérico. |
-| `v9` | Autocomplete simple few-shot; solo resultado numérico. |
+| `v4` | Bilingual teacher with a Guaraní–Spanish glossary. |
+| `v5` | Strict Guaraní with reinforced JSON rules. |
+| `v6` | v5 with mathematical warmup/few-shot examples. |
+| `v7` | v4 with mathematical warmup/few-shot examples. |
+| `v8` | Simple zero-shot autocomplete; numeric result only. |
+| `v9` | Simple few-shot autocomplete; numeric result only. |
 
 ## Prompt v4
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 10/10 | 100.0% | 10/10 | 7.258s |
 | 2 | `gpt-5.6-terra` | 8/10 | 80.0% | 10/10 | 4.349s |
@@ -30,7 +30,7 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 
 ## Prompt v5
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 9/10 | 90.0% | 10/10 | 10.438s |
 | 2 | `gpt-5.6-terra` | 7/10 | 70.0% | 10/10 | 5.107s |
@@ -43,7 +43,7 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 
 ## Prompt v6
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 9/10 | 90.0% | 10/10 | 11.085s |
 | 2 | `gpt-5.6-terra` | 7/10 | 70.0% | 10/10 | 5.516s |
@@ -56,7 +56,7 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 
 ## Prompt v7
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 10/10 | 100.0% | 10/10 | 7.150s |
 | 2 | `gpt-5.6-terra` | 8/10 | 80.0% | 10/10 | 4.013s |
@@ -69,7 +69,7 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 
 ## Prompt v8
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 10/10 | 100.0% | 0/10 | 3.934s |
 | 2 | `gpt-5.6-terra` | 7/10 | 70.0% | 0/10 | 3.152s |
@@ -82,7 +82,7 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 
 ## Prompt v9
 
-| Posición | Modelo | Aciertos | Exactitud | JSON válido | Latencia |
+| Rank | Model | Correct answers | Accuracy | Valid JSON | Latency |
 |---:|---|---:|---:|---:|---:|
 | 1 | `gpt-5.5` | 10/10 | 100.0% | 0/10 | 4.091s |
 | 2 | `gpt-5.6-terra` | 9/10 | 90.0% | 0/10 | 3.285s |
@@ -93,9 +93,9 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 | 7 | `gpt-5.4-mini` | 3/10 | 30.0% | 0/10 | 1.435s |
 | 8 | `grok-4-1-fast-non-reasoning` | 1/10 | 10.0% | 0/10 | 0.637s |
 
-## Comparación Final
+## Final Comparison
 
-| Modelo | v4 | v5 | v6 | v7 | v8 | v9 | Mejor prompt | Mejor resultado |
+| Model | v4 | v5 | v6 | v7 | v8 | v9 | Best prompt | Best result |
 |---|---:|---:|---:|---:|---:|---:|---|---:|
 | `gpt-5.5` | 10/10 | 9/10 | 9/10 | 10/10 | 10/10 | 10/10 | `v7` | 10/10 |
 | `gpt-5.6-terra` | 8/10 | 7/10 | 7/10 | 8/10 | 7/10 | 9/10 | `v9` | 9/10 |
@@ -106,6 +106,6 @@ Métrica principal: `response.final_answer.value == expected_answer`.
 | `gpt-4o-mini` | 3/10 | 2/10 | 2/10 | 4/10 | 2/10 | 3/10 | `v7` | 4/10 |
 | `grok-4-1-fast-non-reasoning` | 0/10 | 2/10 | 4/10 | 4/10 | 1/10 | 1/10 | `v6` | 4/10 |
 
-## Conclusión
+## Conclusion
 
-`gpt-5.5` es el mejor modelo global: alcanza 10/10 con varios prompts. `gpt-5.6-terra` queda segundo con 9/10 usando `v9`.
+`gpt-5.5` is the best overall model: it reaches 10/10 with several prompts. `gpt-5.6-terra` comes second with 9/10 using `v9`.

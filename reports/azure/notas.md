@@ -1,66 +1,68 @@
-Evaluaciones realizadas en las pruebas
+Evaluations carried out during testing
 
-Prueba 1 en guarani:
+> Prompt instructions are translated into English for reference. The original experimental prompts remain in `guarani_math_prompts.json` in the prompts directory. Guaraní text and literal model outputs are preserved.
 
-Promp: 
-"Eres un profesor de matemáticas de primaria. Tu tarea es resolver y explicar un problema matemático para un niño de 7 años.
+Test 1 in Guaraní:
 
-Debes utilizar palabras sencillas, oraciones cortas y operaciones fáciles de seguir. La explicación no puede ser técnica ni complicada.
+Prompt:
+"You are a primary school mathematics teacher. Your task is to solve and explain a mathematical problem for a 7-year-old child.
 
-Resuelve el problema y genera tres opciones de respuesta:
+You must use simple words, short sentences, and operations that are easy to follow. The explanation must not be technical or complicated.
 
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Explica brevemente cómo llegaste a la respuesta.
-* Divide la solución en pasos simples.
-* Devuelve exclusivamente un JSON válido.
-* No agregues texto antes ni después del JSON.
-* No utilices bloques Markdown.
-* Las respuesta deben estar en guarani.
-* Las opciones deben estar en guarani.
-* La explicación debe estar en guarani.
-* No puedes utilizar el español ni ningún otro idioma que no sea el guaraní.
+Solve the problem and generate three answer options:
 
-Utiliza exactamente esta estructura:
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Briefly explain how you arrived at the answer.
+* Break the solution into simple steps.
+* Return only valid JSON.
+* Do not add any text before or after the JSON.
+* Do not use Markdown blocks.
+* Answers must be in Guaraní.
+* Options must be in Guaraní.
+* The explanation must be in Guaraní.
+* You must not use Spanish or any language other than Guaraní.
+
+Use exactly this structure:
 
 {{
-"reasoning": "Explicación breve y sencilla para un niño de 7 años.",
+"reasoning": "A brief, simple explanation for a 7-year-old child.",
 "steps": [
-"Primer paso explicado de manera sencilla.",
-"Segundo paso explicado de manera sencilla."
+"First step explained simply.",
+"Second step explained simply."
 ],
 "final_answer": {{
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 }},
 "options": [
 {{
 "id": "A",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 }},
 {{
 "id": "B",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 }},
 {{
 "id": "C",
 "value": 0,
-"unit": "unidad correspondiente"
+"unit": "corresponding unit"
 }}
 ],
 "correct_option_id": "A"
 }}"
 
-- Modelo más acertado: **gpt-4.1**
+- Most accurate model: **gpt-4.1**
 
-## Ranking Principal
+## Main Ranking
 
-| Posición | Modelo | Aciertos estrictos | Exactitud estricta | Aciertos recuperados | JSON válido | Opción consistente | Errores API | Errores JSON | Latencia media |
+| Rank | Model | Strict correct answers | Strict accuracy | Recovered correct answers | Valid JSON | Consistent option | API errors | JSON errors | Mean latency |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
 | 1 | gpt-4.1 | 6/10 | 60.0% | 6/10 | 10/10 | 10/10 | 0 | 0 | 3.583s |
 | 2 | gpt-5.4-mini | 5/10 | 50.0% | 5/10 | 10/10 | 10/10 | 0 | 0 | 3.089s |
@@ -70,5 +72,5 @@ Utiliza exactamente esta estructura:
 | 6 | gpt-4o-mini | 2/10 | 20.0% | 2/10 | 10/10 | 10/10 | 0 | 0 | 3.038s |
 
 
-Prueba 2, cambios en el promp.
+Test 2, prompt changes.
 

@@ -1,26 +1,26 @@
-# Reporte de prompts por modelo
+# Prompt Accuracy Report by Model
 
-## Resumen
+## Summary
 
-- Archivo evaluado: `model_test_results_gemini_3.5_live_translate_preview.jsonl`
-- Intentos leídos: 50
-- Intentos evaluados para ranking: 50
-- Líneas JSONL inválidas: 0
-- Mejor combinación: **gemini / gemini-3.5-live-translate-preview / v3** (0/10)
+- Evaluated file: `model_test_results_gemini_3.5_live_translate_preview.jsonl`
+- Attempts read: 50
+- Attempts evaluated for ranking: 50
+- Invalid JSONL lines: 0
+- Best combination: **gemini / gemini-3.5-live-translate-preview / v3** (0/10)
 
-## Ranking Por Prompt
+## Ranking by Prompt
 
-| Posición | Proveedor | Modelo | Prompt | Nombre | Aciertos | Exactitud | JSON válido | Opción consistente | Errores API | Errores JSON | Latencia media |
+| Rank | Provider | Model | Prompt | Name | Correct answers | Accuracy | Valid JSON | Consistent option | API errors | JSON errors | Mean latency |
 |---:|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| 1 | gemini | gemini-3.5-live-translate-preview | v3 | Profesor bilingüe con interpretación semántica | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.417s |
-| 2 | gemini | gemini-3.5-live-translate-preview | v4 | Profesor bilingüe con glosario | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.420s |
-| 3 | gemini | gemini-3.5-live-translate-preview | v2 | Traducción interna al español | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.423s |
-| 4 | gemini | gemini-3.5-live-translate-preview | v5 | Guaraní estricto con JSON reforzado | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.541s |
-| 5 | gemini | gemini-3.5-live-translate-preview | v1 | Guaraní estricto | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.920s |
+| 1 | gemini | gemini-3.5-live-translate-preview | v3 | Bilingual teacher with semantic interpretation | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.417s |
+| 2 | gemini | gemini-3.5-live-translate-preview | v4 | Bilingual teacher with glossary | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.420s |
+| 3 | gemini | gemini-3.5-live-translate-preview | v2 | Internal translation into Spanish | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.423s |
+| 4 | gemini | gemini-3.5-live-translate-preview | v5 | Strict Guaraní with reinforced JSON rules | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.541s |
+| 5 | gemini | gemini-3.5-live-translate-preview | v1 | Strict Guaraní | 0/10 | 0.0% | 0/10 | 0/10 | 10 | 0 | 0.920s |
 
-## Detalle Por Problema
+## Per-Problem Details
 
-| Prompt | Problema | Modelo | Esperado | Predicho | Correcto | JSON válido | Línea |
+| Prompt | Problem | Model | Expected | Predicted | Correct | Valid JSON | Line |
 |---|---:|---|---:|---:|---|---|---:|
 | v1 | 1 | gemini-3.5-live-translate-preview | 18 | None | no | no | 1 |
 | v1 | 2 | gemini-3.5-live-translate-preview | 8 | None | no | no | 2 |

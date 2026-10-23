@@ -1,28 +1,28 @@
-# Resumen Claude v5
+# Claude Summary v5
 
-Todas las corridas fueron evaluadas con el prompt `v5` (`Guaraní estricto con JSON reforzado`).
+All runs were evaluated with prompt `v5` (`Strict Guaraní with reinforced JSON rules`).
 
-La métrica principal es el acierto estricto: `response.final_answer.value == expected_answer`.
+The main metric is strict accuracy: `response.final_answer.value == expected_answer`.
 
-## Comparación de modelos
+## Model Comparison
 
-| Modelo/Corrida | Modelo reportado | Prompt | Aciertos | Exactitud | JSON válido | Opción consistente | Errores |
+| Model/Run | Reported model | Prompt | Correct answers | Accuracy | Valid JSON | Consistent option | Errors |
 |---|---|---|---:|---:|---:|---:|---|
 | `sonnet5_extra` | `claude-sonnet-5` | `v5` | 9/10 | 90.0% | 10/10 | 10/10 | P6 (60 -> 30) |
 | `sonnet5_hard` | `gpt-5` | `v5` | 8/10 | 80.0% | 10/10 | 10/10 | P6 (60 -> 2.5), P8 (360 -> 120) |
 | `sonnet5_medium` | `gpt-5` | `v5` | 7/10 | 70.0% | 10/10 | 10/10 | P1 (18 -> 10), P3 (140 -> 280), P6 (60 -> 3) |
 
-## Ranking global
+## Global Ranking
 
-| Posición | Modelo/Corrida | Aciertos estrictos | Exactitud estricta | JSON válido | Errores |
+| Rank | Model/Run | Strict correct answers | Strict accuracy | Valid JSON | Errors |
 |---:|---|---:|---:|---:|---|
 | 1 | `sonnet5_extra` | 9/10 | 90.0% | 10/10 | P6 (60 -> 30) |
 | 2 | `sonnet5_hard` | 8/10 | 80.0% | 10/10 | P6 (60 -> 2.5), P8 (360 -> 120) |
 | 3 | `sonnet5_medium` | 7/10 | 70.0% | 10/10 | P1 (18 -> 10), P3 (140 -> 280), P6 (60 -> 3) |
 
-## Detalle de errores
+## Error Details
 
-| Modelo/Corrida | Problema | Esperado | Predicho |
+| Model/Run | Problem | Expected | Predicted |
 |---|---:|---:|---:|
 | `sonnet5_extra` | 6 | 60 | 30 |
 | `sonnet5_hard` | 6 | 60 | 2.5 |
@@ -31,6 +31,6 @@ La métrica principal es el acierto estricto: `response.final_answer.value == ex
 | `sonnet5_medium` | 3 | 140 | 280 |
 | `sonnet5_medium` | 6 | 60 | 3 |
 
-## Conclusión
+## Conclusion
 
-El mejor resultado fue `sonnet5_extra` con 9/10.
+The best result was `sonnet5_extra` at 9/10.

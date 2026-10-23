@@ -1,18 +1,20 @@
-# Prueba Blind ChatGPT v5
+# ChatGPT v5 Blind Test
 
-Usa el siguiente prompt y resuelve los problemas listados al final.
+> Prompt instructions are translated into English for reference. The original experimental prompts remain in `guarani_math_prompts.json` in the prompts directory. Guaraní text and literal model outputs are preserved.
 
-No tienes respuestas esperadas.
+Use the following prompt and solve the problems listed at the end.
 
-Devuelve solamente JSONL.
+You are not given the expected answers.
 
-Una línea JSON válida por problema.
+Return only JSONL.
 
-No uses Markdown.
+One valid JSON line per problem.
 
-No agregues texto antes ni después del JSONL.
+Do not use Markdown.
 
-Cada línea debe tener esta estructura:
+Do not add any text before or after the JSONL.
+
+Each line must have this structure:
 
 ```json
 {"provider":"chatgpt","model":"gpt-5","prompt_id":"v5","prompt_name":"Guaraní estricto con JSON reforzado","problem_id":1,"response":{"reasoning":"...","steps":["...","..."],"final_answer":{"value":0,"unit":"..."},"options":[{"id":"A","value":0,"unit":"..."},{"id":"B","value":0,"unit":"..."},{"id":"C","value":0,"unit":"..."}],"correct_option_id":"A"}}
@@ -21,38 +23,38 @@ Cada línea debe tener esta estructura:
 Prompt v5:
 
 ```text
-Eres un profesor de matemáticas de primaria. Tu tarea es resolver y explicar un problema matemático para un niño de 7 años.
+You are a primary school mathematics teacher. Your task is to solve and explain a mathematical problem for a 7-year-old child.
 
-Debes utilizar palabras sencillas, oraciones cortas y operaciones fáciles de seguir. La explicación no puede ser técnica ni complicada.
+You must use simple words, short sentences, and operations that are easy to follow. The explanation must not be technical or complicated.
 
-Resuelve el problema y genera tres opciones de respuesta:
+Solve the problem and generate three answer options:
 
-* Una opción debe ser correcta.
-* Dos opciones deben ser incorrectas, pero razonables.
-* Las tres opciones deben ser diferentes.
-* La respuesta correcta debe aparecer en una posición aleatoria; no debe ser siempre la opción A.
-* No inventes información que no aparezca en el problema.
-* Explica brevemente cómo llegaste a la respuesta.
-* Divide la solución en pasos simples.
-* Las respuestas deben estar en guaraní.
-* Las opciones deben estar en guaraní.
-* La explicación debe estar en guaraní.
-* No puedes utilizar el español ni ningún otro idioma que no sea el guaraní en los valores de texto finales.
+* One option must be correct.
+* Two options must be incorrect but reasonable.
+* All three options must be different.
+* The correct answer must appear in a random position; it must not always be option A.
+* Do not invent information that is not in the problem.
+* Briefly explain how you arrived at the answer.
+* Break the solution into simple steps.
+* Answers must be in Guaraní.
+* Options must be in Guaraní.
+* The explanation must be in Guaraní.
+* You must not use Spanish or any language other than Guaraní in the final text values.
 
-Reglas estrictas de formato:
-* Devuelve exclusivamente un JSON válido.
-* No agregues texto antes ni después del JSON.
-* No utilices bloques Markdown.
-* No uses comillas simples para nombres de propiedades ni strings JSON.
-* No agregues signos como ! fuera de strings.
-* Todos los nombres de propiedades deben usar comillas dobles.
-* Todos los textos deben estar entre comillas dobles.
-* No dejes strings sin cerrar.
-* No dejes listas u objetos sin cerrar.
-* Antes de responder, verifica que el JSON pueda ser parseado con json.loads.
-* Antes de responder, verifica que final_answer.value sea igual al valor de la opción indicada por correct_option_id.
+Strict formatting rules:
+* Return only valid JSON.
+* Do not add any text before or after the JSON.
+* Do not use Markdown blocks.
+* Do not use single quotes for property names or JSON strings.
+* Do not add symbols such as ! outside strings.
+* All property names must use double quotes.
+* All text must be enclosed in double quotes.
+* Do not leave strings unclosed.
+* Do not leave lists or objects unclosed.
+* Before responding, check that the JSON can be parsed with json.loads.
+* Before responding, check that final_answer.value equals the value of the option indicated by correct_option_id.
 
-Utiliza exactamente esta estructura:
+Use exactly this structure:
 
 {
 "reasoning": "Ñemyesakã mbyky ha ndahasýiva mitãme g̃uarã.",
@@ -72,12 +74,12 @@ Utiliza exactamente esta estructura:
 "correct_option_id": "A"
 }
 
-Problema:
+Problem:
 
 {problem}
 ```
 
-Problemas:
+Problems:
 
 ```json
 [
