@@ -1,4 +1,5 @@
 import contextlib, io, json, unittest, tempfile
+from urllib.error import HTTPError
 from unittest.mock import patch
 from pathlib import Path
 from src.dataset import DATASETS, LANGUAGES, load_dataset, problem_text
@@ -74,6 +75,23 @@ class NewStudyTests(unittest.TestCase):
         self.assertEqual(result["model_version"],"001")
         self.assertEqual(result["model_metadata_source"],"gemini_models_get")
         self.assertTrue(result["model_metadata_checked_at_utc"].endswith("Z"))
+    def test_metadata_only_cli_does_not_initialize_inference(self):
+        output=io.StringIO()
+        fake={"model_version":"001","provider_model_id":"models/gemini-3.5-flash","model_metadata_checked_at_utc":"2026-11-12T00:00:00Z","model_metadata_source":"gemini_models_get","model_metadata_status":"version_found"}
+        with patch.dict("os.environ",{"GEMINI_API_KEY":"fixture-key"}), \
+             patch("src.run_benchmark.discover_model_metadata",return_value=fake), \
+             patch("src.run_benchmark.create_client",side_effect=AssertionError("client must not be created")), \
+             contextlib.redirect_stdout(output):
+            run(parse_args(["--models","gemini-3.5-flash","--check-model-metadata"]))
+        result=json.loads(output.getvalue())
+        self.assertEqual(result["paid_api_calls"],0)
+        self.assertEqual(result["models"][0]["model_version"],"001")
+    def test_gemini_metadata_error_reports_provider_diagnostic(self):
+        body=io.BytesIO(b'{"error":{"message":"Model is not available to this API key."}}')
+        failure=HTTPError("https://example.invalid",400,"Bad Request",{},body)
+        with patch("src.model_metadata.urlopen",side_effect=failure):
+            with self.assertRaisesRegex(RuntimeError,"Model is not available to this API key"):
+                discover_model_metadata({"provider":"gemini-api","deployment_id":"gemini-3.5-flash"},"not-printed")
     def test_azure_metadata_discovery_uses_deployment_details(self):
         config={"provider":"azure-ai-services","endpoint":"https://example.services.ai.azure.com/openai/v1","deployment_id":"Llama-3.3-70B-Instruct"}
         account=[{"name":"example","resourceGroup":"rg-study"}]

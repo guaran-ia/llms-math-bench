@@ -22,8 +22,21 @@ def _gemini_metadata(model_id: str, api_key: str) -> dict[str, Any]:
     try:
         with urlopen(req, timeout=20) as response:
             return json.loads(response.read().decode("utf-8"))
-    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as exc:
-        raise RuntimeError("Gemini model metadata lookup failed: " + str(exc)) from exc
+    except HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace").strip()
+        try:
+            payload = json.loads(body)
+            detail = (payload.get("error") or {}).get("message") or body
+        except (json.JSONDecodeError, AttributeError):
+            detail = body or str(exc)
+        raise RuntimeError(
+            "Gemini model metadata lookup for {!r} failed (HTTP {}): {}. "
+            "Check GEMINI_MODEL_ID and that GEMINI_API_KEY is enabled for the Gemini API.".format(
+                model_id, exc.code, detail
+            )
+        ) from exc
+    except (URLError, TimeoutError, json.JSONDecodeError) as exc:
+        raise RuntimeError("Gemini model metadata lookup failed for {!r}: {}".format(model_id, exc)) from exc
 
 
 def _az_json(*args: str, environ: dict[str, str] | None = None) -> Any:

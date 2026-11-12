@@ -133,6 +133,26 @@ def run(args) -> Path | None:
     if not output_path.is_absolute():
         output_path = PROJECT_ROOT / output_path
 
+    if args.check_model_metadata:
+        metadata_rows = []
+        for config in model_configs:
+            key = _credential_name(config)
+            api_key = os.getenv(key)
+            if not api_key:
+                raise RuntimeError("Set " + key + " in .env or the environment before checking model metadata.")
+            config.update(discover_model_metadata(config, api_key))
+            metadata_rows.append({
+                "model_id": config["model_id"],
+                "deployment_id": config["deployment_id"],
+                "model_version": config.get("model_version"),
+                "provider_model_id": config.get("provider_model_id"),
+                "checked_at_utc": config.get("model_metadata_checked_at_utc"),
+                "source": config.get("model_metadata_source"),
+                "status": config.get("model_metadata_status"),
+            })
+        print(json.dumps({"metadata_only": True, "paid_api_calls": 0, "models": metadata_rows}, ensure_ascii=False, indent=2))
+        return None
+
     if args.dry_run:
         summary = {
             "run_id": run_id,
@@ -284,7 +304,9 @@ def parse_args(argv=None):
     parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
     parser.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS)
     parser.add_argument("--output", help="JSONL output path; default is a unique timestamped file directly under results/.")
-    parser.add_argument("--dry-run", action="store_true", help="Validate the full matrix and report planned calls without reading API keys or calling providers.")
+    checks = parser.add_mutually_exclusive_group()
+    checks.add_argument("--dry-run", action="store_true", help="Validate the full matrix and report planned calls without reading API keys or calling providers.")
+    checks.add_argument("--check-model-metadata", action="store_true", help="Read model versions from provider metadata APIs without sending inference requests.")
     parser.add_argument("--show-prompts", action="store_true", help="With --dry-run, print prompt previews for each selected language and condition.")
     return parser.parse_args(argv)
 

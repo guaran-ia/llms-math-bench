@@ -107,7 +107,13 @@ Endpoint and deployment variables have defaults for the configured GuaranIA reso
 python -m src.run_benchmark --dry-run
 ```
 
-The dry run validates all selected dataset-language-condition combinations and prints the planned request count and routing configuration. It makes zero provider calls and does not require credentials. During a real run, read-only metadata lookups happen before any inference requests; a failed lookup stops the run before paid model calls. The expected count for the default full design is 2,800. To review generated instructions:
+The dry run validates all selected dataset-language-condition combinations and prints the planned request count and routing configuration. It makes zero provider calls and does not require credentials. During a real run, read-only metadata lookups happen before any inference requests; a failed lookup stops the run before paid model calls. The expected count for the default full design is 2,800. To check model versions without sending inference requests, run:
+
+```bash
+python -m src.run_benchmark --check-model-metadata
+```
+
+This check requires provider credentials and Azure CLI sign-in for Azure models. It prints the model IDs, discovered versions, UTC check times, and lookup status. To review generated instructions:
 
 ```bash
 python -m src.run_benchmark --dry-run --show-prompts
