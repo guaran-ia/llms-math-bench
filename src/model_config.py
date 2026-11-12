@@ -14,6 +14,7 @@ class ModelConfig:
     deployment_env: str
     endpoint_env: str
     default_endpoint: str
+    model_version_env: str | None = None
     api_version_env: str | None = None
     default_api_version: str | None = None
 
@@ -23,6 +24,7 @@ class ModelConfig:
             "model_id": self.model_id,
             "provider": self.provider,
             "deployment_id": env.get(self.deployment_env, self.default_deployment),
+            "model_version": (env.get(self.model_version_env) or None) if self.model_version_env else None,
             "endpoint": (env.get(self.endpoint_env) or self.default_endpoint).rstrip("/"),
             "api_version": (
                 (env.get(self.api_version_env) or self.default_api_version)
@@ -44,12 +46,14 @@ MODEL_CONFIGS = {
         default_deployment="grok-4-1-fast-non-reasoning", deployment_env="AZURE_GROK41_DEPLOYMENT",
         endpoint_env="AZURE_AI_SERVICES_ENDPOINT",
         default_endpoint="https://guarania-maas.services.ai.azure.com/openai/v1",
+        model_version_env="AZURE_GROK41_MODEL_VERSION",
     ),
     "gpt-4o-mini": ModelConfig(
         model_id="gpt-4o-mini", provider="azure-openai",
         default_deployment="gpt-4o-mini", deployment_env="AZURE_GPT4O_MINI_DEPLOYMENT",
         endpoint_env="AZURE_OPENAI_ENDPOINT",
         default_endpoint="https://guarania-maas.cognitiveservices.azure.com/",
+        model_version_env="AZURE_GPT4O_MINI_MODEL_VERSION",
         api_version_env="AZURE_OPENAI_API_VERSION", default_api_version="2024-12-01-preview",
     ),
     "llama-3.3-70b": ModelConfig(
@@ -57,12 +61,14 @@ MODEL_CONFIGS = {
         default_deployment="Llama-3.3-70B-Instruct", deployment_env="AZURE_LLAMA33_DEPLOYMENT",
         endpoint_env="AZURE_AI_SERVICES_ENDPOINT",
         default_endpoint="https://guarania-maas.services.ai.azure.com/openai/v1",
+        model_version_env="AZURE_LLAMA33_MODEL_VERSION",
     ),
     "mistral-large-3": ModelConfig(
         model_id="mistral-large-3", provider="azure-ai-services",
         default_deployment="Mistral-Large-3", deployment_env="AZURE_MISTRAL_LARGE3_DEPLOYMENT",
         endpoint_env="AZURE_AI_SERVICES_ENDPOINT",
         default_endpoint="https://guarania-maas.services.ai.azure.com/openai/v1",
+        model_version_env="AZURE_MISTRAL_LARGE3_MODEL_VERSION",
     ),
 }
 

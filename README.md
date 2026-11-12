@@ -38,8 +38,8 @@ prompt text have been reviewed by a native Guarani speaker.
 | Mistral Large 3 | Azure AI Services | `AZURE_MISTRAL_LARGE3_DEPLOYMENT` |
 
 Before inference starts, the runner looks up the selected models’ published metadata.
-For Gemini it calls the Gemini Models API; for Azure it reads the deployment details
-through Azure CLI and Azure Resource Manager. It records the discovered version, the
+For Gemini it calls the Gemini Models API; for Azure it reads the version configured
+from the portal. It records the configured version, the
 provider model name, lookup source/status, and a fresh `model_metadata_checked_at_utc`
 timestamp in every request record. It also records the API-returned model ID when
 available, endpoint/API settings, SDK version, decoding settings, request/completion
@@ -80,8 +80,7 @@ Reports provide accuracy by dataset, language, model, and prompt condition with 
 
 ### 1. Set up Python
 
-Use Python 3.10 or newer. For Azure version discovery, install the Azure CLI and run
-`az login` with read access to the deployment resource. From the repository root:
+Use Python 3.10 or newer. No Azure CLI is required. From the repository root:
 
 ```bash
 python -m venv .venv
@@ -97,9 +96,10 @@ Required credentials:
 
 - `GEMINI_API_KEY` for Gemini.
 - `AZURE_OPENAI_API_KEY` for Azure inference.
-- Azure CLI sign-in (`az login`) with permission to read the account and its model deployments; this separate management-plane access is used only for version lookup. If the intended subscription is not active, set optional `AZURE_SUBSCRIPTION_ID`.
 
-Endpoint and deployment variables have defaults for the configured GuaranIA resource; override them only if your deployment names or endpoints differ. `AZURE_OPENAI_API_VERSION` applies to GPT-4o mini. The runner uses one Azure inference key for the configured Azure endpoints. Confirm the endpoint and deployments are accessible. Never put a credential in a command-line argument or results file.
+To find an Azure version, open the Azure AI Foundry portal, go to **Models + endpoints**, select the deployment, and read **Model version** on its **Details** page. In the classic Azure portal, open the Azure OpenAI resource, select **Model deployments**, then open the deployment details. Enter the displayed version in the matching `AZURE_*_MODEL_VERSION` field in `.env`. The portal shows the deployment's model version separately from its deployment name. See [Microsoft's model-version guidance](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/model-versions).
+
+Endpoint and deployment variables have defaults for the configured GuaranIA resource; override them only if your deployment names or endpoints differ. `AZURE_OPENAI_API_VERSION` applies to GPT-4o mini. Copy each Azure model version from the portal into its matching `AZURE_*_MODEL_VERSION` field. The optional `AZURE_MODEL_METADATA_PORTAL_CHECKED_AT_UTC` records when you checked them. The runner stamps `model_metadata_checked_at_utc` when it reads the configured metadata. It uses one Azure inference key for the configured endpoints. Never put a credential in a command-line argument or results file.
 
 ### 3. Validate the full study without making calls
 
@@ -107,13 +107,13 @@ Endpoint and deployment variables have defaults for the configured GuaranIA reso
 python -m src.run_benchmark --dry-run
 ```
 
-The dry run validates all selected dataset-language-condition combinations and prints the planned request count and routing configuration. It makes zero provider calls and does not require credentials. During a real run, read-only metadata lookups happen before any inference requests; a failed lookup stops the run before paid model calls. The expected count for the default full design is 2,800. To check model versions without sending inference requests, run:
+The dry run validates all selected dataset-language-condition combinations and prints the planned request count and routing configuration. It makes zero provider calls and does not require credentials. During a real run, metadata is resolved before inference requests; a failed Gemini lookup stops the run before paid model calls. The expected count for the default full design is 2,800. To check model versions without sending inference requests, run:
 
 ```bash
 python -m src.run_benchmark --check-model-metadata
 ```
 
-This check requires provider credentials and Azure CLI sign-in for Azure models. It prints the model IDs, discovered versions, UTC check times, and lookup status. To review generated instructions:
+This check calls the Gemini Models API for Gemini and reads the configured Azure version fields; it does not need Azure CLI or an Azure management-plane login. It prints the model IDs, versions, UTC check times, and lookup status. A Gemini API key is needed only when Gemini is selected. To review generated instructions:
 
 ```bash
 python -m src.run_benchmark --dry-run --show-prompts

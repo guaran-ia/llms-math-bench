@@ -137,9 +137,9 @@ def run(args) -> Path | None:
         metadata_rows = []
         for config in model_configs:
             key = _credential_name(config)
-            api_key = os.getenv(key)
-            if not api_key:
-                raise RuntimeError("Set " + key + " in .env or the environment before checking model metadata.")
+            api_key = os.getenv(key, "")
+            if config["provider"] == "gemini-api" and not api_key:
+                raise RuntimeError("Set " + key + " in .env or the environment before checking Gemini metadata.")
             config.update(discover_model_metadata(config, api_key))
             metadata_rows.append({
                 "model_id": config["model_id"],
@@ -256,6 +256,7 @@ def run(args) -> Path | None:
                                 "model_metadata_provider_model_id": config.get("provider_model_id"),
                                 "model_metadata_source": config.get("model_metadata_source"),
                                 "model_metadata_status": config.get("model_metadata_status"),
+                                "model_metadata_portal_checked_at_utc": config.get("model_metadata_portal_checked_at_utc"),
                                 "model_metadata": config.get("model_metadata"),
                                 "provider_returned_model_id": _model_version(clients[config["model_id"]], config, response) if response is not None else None,
                                 "model_metadata_checked_at_utc": config.get("model_metadata_checked_at_utc"),

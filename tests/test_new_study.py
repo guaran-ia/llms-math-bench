@@ -49,6 +49,8 @@ class NewStudyTests(unittest.TestCase):
         resolved=resolve_models(environ={"AZURE_AI_SERVICES_ENDPOINT":"","AZURE_OPENAI_ENDPOINT":""})
         self.assertTrue(all(m["endpoint"] for m in resolved))
         self.assertEqual(next(m for m in resolved if m["model_id"]=="gpt-4o-mini")["api_version"],"2024-12-01-preview")
+        versioned=resolve_models(["gpt-4o-mini"],{"AZURE_GPT4O_MINI_MODEL_VERSION":"2024-07-18"})
+        self.assertEqual(versioned[0]["model_version"],"2024-07-18")
     def test_full_matrix_is_2800_and_dry_run_has_no_calls(self):
         self.assertEqual(planned_call_count(list(DATASETS),list(MODEL_CONFIGS),LANGUAGES,list(CONDITIONS)),2800)
         output=io.StringIO()
@@ -92,15 +94,12 @@ class NewStudyTests(unittest.TestCase):
         with patch("src.model_metadata.urlopen",side_effect=failure):
             with self.assertRaisesRegex(RuntimeError,"Model is not available to this API key"):
                 discover_model_metadata({"provider":"gemini-api","deployment_id":"gemini-3.5-flash"},"not-printed")
-    def test_azure_metadata_discovery_uses_deployment_details(self):
-        config={"provider":"azure-ai-services","endpoint":"https://example.services.ai.azure.com/openai/v1","deployment_id":"Llama-3.3-70B-Instruct"}
-        account=[{"name":"example","resourceGroup":"rg-study"}]
-        deployment={"name":"Llama-3.3-70B-Instruct","properties":{"model":{"name":"Llama-3.3-70B-Instruct","version":"3.3","format":"Meta"}}}
-        with patch("src.model_metadata._az_json",side_effect=[account,deployment]) as mocked:
-            result=discover_model_metadata(config,"fixture-key",{"AZURE_SUBSCRIPTION_ID":"sub-fixture"})
+    def test_azure_metadata_uses_portal_config_without_cli(self):
+        config={"provider":"azure-ai-services","model_id":"llama-3.3-70b","deployment_id":"Llama-3.3-70B-Instruct","model_version":"3.3"}
+        result=discover_model_metadata(config)
         self.assertEqual(result["model_version"],"3.3")
-        self.assertEqual(result["model_metadata_source"],"azure_resource_manager_deployment")
-        self.assertEqual(mocked.call_count,2)
+        self.assertEqual(result["model_metadata_source"],"azure_portal_configuration")
+        self.assertEqual(result["model_metadata_status"],"version_configured")
         self.assertTrue(result["model_metadata_checked_at_utc"].endswith("Z"))
     def test_response_metadata_capture_helpers(self):
         self.assertEqual(_dump_usage(FakeResponse()),{"total_tokens":17})
