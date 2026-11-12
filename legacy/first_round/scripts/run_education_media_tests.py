@@ -1,13 +1,16 @@
 import argparse
+import hashlib
 import json
 import os
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 from openai import OpenAI
+from src.language_prompts import language_prompt
 
-from test_models import MODELS as CHAT_MODELS
-from test_models import build_clients, load_dotenv, read_api_key
+from src.test_models import MODELS as CHAT_MODELS
+from src.test_models import build_clients, load_dotenv, read_api_key
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -68,11 +71,19 @@ def parse_json_response(content):
 def format_prompt(prompt_template, problem):
     return prompt_template.format(
         problem=problem.get("problem_gn") or problem.get("problem") or "",
-        problem_es=problem.get("problem_es", ""),
+        problem_es=problem.get("problem_es") or problem.get("problema_es", ""),
         reasoning_type=problem.get("reasoning_type", ""),
         grade=problem.get("grade", ""),
         subject=problem.get("subject", ""),
     )
+
+
+def file_sha256(path):
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def call_chat_model(clients, model_name, prompt, temperature):
@@ -138,52 +149,73 @@ def run_tests(args):
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    languages = ["gn", "es"] if args.language == "both" else [args.language]
+    run_started_at = datetime.now(timezone.utc).isoformat()
+    problems_sha256 = file_sha256(args.problems)
+    prompts_sha256 = file_sha256(args.prompts)
     with output_path.open("a", encoding="utf-8") as output_file:
-        for prompt_config in prompts:
-            for problem in selected_problems:
-                prompt = format_prompt(prompt_config["template"], problem)
-                for model_name in selected_models:
-                    started_at = time.time()
-                    print(
-                        f"Probando {model_name} con prompt {prompt_config['id']} "
-                        f"y problema {problem['id']}..."
-                    )
+        for language in languages:
+            for prompt_config in prompts:
+                template = language_prompt(prompt_config["template"], language)
+                for problem in selected_problems:
+                    problem_text = (problem.get("problem_gn") or problem.get("problem")) if language == "gn" else (problem.get("problem_es") or problem.get("problema_es"))
+                    if not problem_text:
+                        raise ValueError(f"El problema {problem.get('id')} no tiene texto para language={language}.")
+                    localized_problem = dict(problem, problem_gn=problem_text, problem_es=problem_text)
+                    prompt = format_prompt(template, localized_problem)
+                    for model_name in selected_models:
+                        started_at = time.time()
+                        print(
+                            f"Probando {model_name} con prompt {prompt_config['id']} "
+                            f"y problema {problem['id']}..."
+                        )
 
-                    try:
-                        if model_name in RESPONSES_MODELS:
-                            provider = "azure-services-responses"
-                            content = call_responses_model(responses_client, model_name, prompt)
-                        else:
-                            provider = "azure"
-                            content = call_chat_model(chat_clients, model_name, prompt, args.temperature)
-                        parsed_response, parse_error = parse_json_response(content)
-                        error = None
-                    except Exception as exc:
-                        provider = "azure-services-responses" if model_name in RESPONSES_MODELS else "azure"
-                        content = None
-                        parsed_response = None
-                        parse_error = None
-                        error = str(exc)
+                        try:
+                            if model_name in RESPONSES_MODELS:
+                                provider = "azure-services-responses"
+                                content = call_responses_model(responses_client, model_name, prompt)
+                            else:
+                                provider = "azure"
+                                content = call_chat_model(chat_clients, model_name, prompt, args.temperature)
+                            parsed_response, parse_error = parse_json_response(content)
+                            error = None
+                        except Exception as exc:
+                            provider = "azure-services-responses" if model_name in RESPONSES_MODELS else "azure"
+                            content = None
+                            parsed_response = None
+                            parse_error = None
+                            error = str(exc)
 
-                    result = {
-                        "provider": provider,
-                        "model": model_name,
-                        "prompt_id": prompt_config["id"],
-                        "prompt_name": prompt_config.get("name"),
-                        "problem_id": problem["id"],
-                        "problem": problem.get("problem_gn"),
-                        "problem_es": problem.get("problem_es"),
-                        "expected_answer": problem.get("expected_answer"),
-                        "reasoning_type": problem.get("reasoning_type"),
-                        "difficulty": problem.get("difficulty"),
-                        "response": parsed_response,
-                        "raw_response": content,
-                        "json_parse_error": parse_error,
-                        "error": error,
-                        "latency_seconds": round(time.time() - started_at, 3),
-                    }
-                    output_file.write(json.dumps(result, ensure_ascii=False) + "\n")
-                    output_file.flush()
+                        result = {
+                            "provider": provider,
+                            "model": model_name,
+                            "requested_model_id": all_models[model_name]["deployment"],
+                            "prompt_id": f"{prompt_config['id']}_{language}" if args.language == "both" else prompt_config["id"],
+                            "prompt_pair_id": prompt_config["id"],
+                            "prompt_name": prompt_config.get("name"),
+                            "language": language,
+                            "language_pair_id": f"{prompt_config['id']}:{problem['id']}:{model_name}",
+                            "run_started_at": run_started_at,
+                            "prompt_version": f"paired-v1/{prompt_config['id']}/{language}",
+                            "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                            "dataset_sha256": problems_sha256,
+                            "prompts_file_sha256": prompts_sha256,
+                            "temperature": args.temperature if model_name not in RESPONSES_MODELS else None,
+                            "max_output_tokens": (RESPONSES_MODELS[model_name]["max_output_tokens"] if model_name in RESPONSES_MODELS else all_models[model_name]["max_tokens"]),
+                            "problem_id": problem["id"],
+                            "problem": problem_text,
+                            "problem_es": problem.get("problem_es"),
+                            "expected_answer": problem.get("expected_answer"),
+                            "reasoning_type": problem.get("reasoning_type"),
+                            "difficulty": problem.get("difficulty"),
+                            "response": parsed_response,
+                            "raw_response": content,
+                            "json_parse_error": parse_error,
+                            "error": error,
+                            "latency_seconds": round(time.time() - started_at, 3),
+                        }
+                        output_file.write(json.dumps(result, ensure_ascii=False) + "\n")
+                        output_file.flush()
 
     print(f"Resultados guardados en {output_path}")
 
@@ -198,6 +230,8 @@ def parse_args():
     parser.add_argument("--problem-id", type=int)
     parser.add_argument("--prompt-id", nargs="+", default=["em_v1", "em_v2"])
     parser.add_argument("--temperature", type=float, default=0.7)
+    parser.add_argument("--language", choices=["gn", "es", "both"], default="gn",
+                        help="Language for a run; both performs paired Guarani and Spanish conditions.")
     parser.add_argument("--models", nargs="+", choices=all_model_names)
     return parser.parse_args()
 

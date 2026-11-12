@@ -4,6 +4,7 @@ import re
 from collections import defaultdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
+from src.math_evaluation import evaluate as evaluate_math_row, equivalent as math_equivalent
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -127,25 +128,19 @@ def correct_option_value(response):
 
 
 def evaluate_row(row):
+    result = evaluate_math_row(row)
     parsed_response = row.get("response")
-    raw_response = row.get("raw_response")
-    recovered_response = parsed_response or extract_json_from_raw(raw_response)
-    expected = row.get("expected_answer")
-    predicted = final_answer_value(recovered_response)
-    if predicted is None:
-        predicted = extract_numeric_from_raw(raw_response)
+    recovered_response = parsed_response if parsed_response is not None else extract_json_from_raw(row.get("raw_response"))
     parsed_predicted = final_answer_value(parsed_response)
-    if parsed_predicted is None:
-        parsed_predicted = extract_numeric_from_raw(raw_response)
     option_value = correct_option_value(recovered_response)
 
     return {
-        "strict_correct": row.get("error") is None and values_match(expected, parsed_predicted),
-        "recovered_correct": row.get("error") is None and values_match(expected, predicted),
-        "json_valid": isinstance(parsed_response, dict) and row.get("json_parse_error") is None,
-        "option_consistent": values_match(predicted, option_value),
-        "expected": expected,
-        "predicted": predicted,
+        "strict_correct": row.get("error") is None and math_equivalent(row.get("expected_answer"), parsed_predicted),
+        "recovered_correct": result["correct"],
+        "json_valid": result["json_valid"],
+        "option_consistent": math_equivalent(result["predicted"], option_value),
+        "expected": row.get("expected_answer"),
+        "predicted": result["predicted"],
     }
 
 

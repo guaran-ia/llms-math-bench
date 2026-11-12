@@ -4,6 +4,7 @@ import re
 from collections import defaultdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
+from src.math_evaluation import evaluate as evaluate_math_row, equivalent as math_equivalent, final_value
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -115,17 +116,17 @@ def correct_option_value(response):
 
 
 def evaluate_row(row):
+    result = evaluate_math_row(row)
     parsed_response = row.get("response")
-    recovered_response = parsed_response or extract_json_from_raw(row.get("raw_response"))
-
     expected = row.get("expected_answer")
-    parsed_final_value = final_answer_value(parsed_response)
-    recovered_final_value = final_answer_value(recovered_response)
+    parsed_final_value = final_value(parsed_response)
+    recovered_final_value = result["predicted"]
+    recovered_response = parsed_response if parsed_response is not None else extract_json_from_raw(row.get("raw_response"))
     recovered_option_value = correct_option_value(recovered_response)
 
-    strict_correct = row.get("error") is None and values_match(expected, parsed_final_value)
-    recovered_correct = row.get("error") is None and values_match(expected, recovered_final_value)
-    option_consistent = values_match(recovered_final_value, recovered_option_value)
+    strict_correct = row.get("error") is None and math_equivalent(expected, parsed_final_value)
+    recovered_correct = result["correct"]
+    option_consistent = math_equivalent(recovered_final_value, recovered_option_value)
 
     return {
         "strict_correct": strict_correct,

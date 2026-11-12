@@ -3,7 +3,7 @@ import json
 import time
 from pathlib import Path
 
-from test_models import MODELS, build_clients, load_dotenv, read_api_key, select_problems
+from src.test_models import MODELS, build_clients, load_dotenv, read_api_key, select_problems
 
 
 BASE_DIR = Path(__file__).resolve().parent

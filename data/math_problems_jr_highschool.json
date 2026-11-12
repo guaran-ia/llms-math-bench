@@ -9,7 +9,8 @@
         "problem_es": "Halla el logaritmo de x utilizando las propiedades de los logaritmos y verifica el resultado con la calculadora. x = 21^2 / 25.",
         "expected_answer": 1.2465,
         "reasoning_type": "logaritmos",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "logaritmos"
     },
     {
         "id": 2,
@@ -30,7 +31,8 @@
             ]
         ],
         "reasoning_type": "suma_de_matrices",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "matrix_addition"
     },
     {
         "id": 3,
@@ -42,7 +44,8 @@
         "problem_es": "Utiliza la regla de Laplace para calcular el determinante desarrollando por una fila. |5 1 2; 4 2 3; -2 4 4|",
         "expected_answer": -2,
         "reasoning_type": "determinante_regla_de_laplace",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "determinant"
     },
     {
         "id": 4,
@@ -54,7 +57,8 @@
         "problem_es": "¿Cómo puedes representar mediante una ecuación una circunferencia de centro (-2, -4) y radio 3√2?",
         "expected_answer": "(x + 2)^2 + (y + 4)^2 = 18",
         "reasoning_type": "ecuación_de_circunferencia",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "circle_equation"
     },
     {
         "id": 5,
@@ -66,7 +70,8 @@
         "problem_es": "Halla la ecuación de la circunferencia de centro C (-5, 1) y radio 7/3 y grafícala.",
         "expected_answer": "(x + 5)^2 + (y - 1)^2 = 49/9",
         "reasoning_type": "ecuación_de_circunferencia",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "circle_equation"
     },
     {
         "id": 6,
@@ -78,7 +83,8 @@
         "problem_es": "Halla la ecuación de una circunferencia cuyo diámetro tiene como extremos los puntos (-4, 5) y (2, -3), y grafícala.",
         "expected_answer": "(x + 1)^2 + (y - 1)^2 = 25",
         "reasoning_type": "circunferencia_a_partir_del_diametro",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "circle_equation_from_diameter"
     },
     {
         "id": 7,
@@ -90,7 +96,8 @@
         "problem_es": "Halla la ecuación de la circunferencia de centro (4, 0) que pasa por la intersección de las rectas 5x - 7y - 18 = 0 y 3x + 2y + 14 = 0, y grafícala para comprobar el resultado.",
         "expected_answer": "(x - 4)^2 + y^2 = 52",
         "reasoning_type": "interseccion_de_rectas_y_ecuacion_de_circunferencia",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "line_intersection_circle"
     },
     {
         "id": 8,
@@ -102,7 +109,8 @@
         "problem_es": "Una parábola tiene como directriz y = 2 y como foco F (0, -2). ¿Dónde se encuentra su vértice?",
         "expected_answer": "(0, 0)",
         "reasoning_type": "vertice_de_parabola",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "parabola_vertex"
     },
     {
         "id": 9,
@@ -114,7 +122,8 @@
         "problem_es": "Halla el valor de x utilizando el método de Sarrus. |1 -1 -1; 10 2x 0; 4 0 1| = 0",
         "expected_answer": -1,
         "reasoning_type": "determinante_metodo_de_sarrus",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "determinant"
     },
     {
         "id": 10,
@@ -132,6 +141,7 @@
             "radius": 1
         },
         "reasoning_type": "centro_y_radio_de_circunferencia",
-        "difficulty": "media"
+        "difficulty": "media",
+        "reasoning_type_id": "circle_center_radius"
     }
 ]

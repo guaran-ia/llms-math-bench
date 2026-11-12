@@ -1,171 +1,172 @@
-# Mathematics Experiments in Guaraní
+# Guarani Mathematical Reasoning Benchmark
 
-Evaluate LLMs by solving mathematical problems written in Guaraní.
+This study compares how five language models solve a set of 40 mathematics problems
+when presented in Guarani or Spanish. It also measures the effects of seven prompt
+conditions. Each problem is evaluated in both languages under every prompt condition
+and model.
 
-The main objective was to measure how well different models understand mathematical problems in Guaraní by comparing prompt variants, models, and educational levels.
+## Study design
 
-## Experiments
+### Research questions
 
-We worked with three main groups of problems:
+1. How does answer accuracy vary across the five selected models and the three educational datasets?
+2. For the same problem, model, and prompt, how does performance differ between Guarani and Spanish?
+3. Do the seven prompt interventions change accuracy relative to the standard baseline?
 
-| Dataset | Level | File | Problem statement used by the model | Expected answer |
-|---|---|---|---|---|
-| Early primary education | Primary education | [`data/problemas_matematicos_guarani.json`](data/problemas_matematicos_guarani.json) | `problem` | `expected_answer` |
-| Secondary education | Year 2 | [`data/problemas_matematicos_2do_año.json`](data/problemas_matematicos_2do_año.json) | `problem_gn` | `expected_answer` |
-| EEB | Grade 3 | [`data/problemas_matematicos_3er_grado.json`](data/problemas_matematicos_3er_grado.json) | `problem_gn` | `expected_answer` |
+### Data
 
-Models receive neither the Spanish translation nor the expected answer.
+| Dataset ID | Level | Items | Active source file |
+|---|---|---:|---|
+| `elementary` | Elementary education | 10 | [`data/math_problems_elementary.json`](data/math_problems_elementary.json) |
+| `jr_highschool` | Junior high school | 10 | [`data/math_problems_jr_highschool.json`](data/math_problems_jr_highschool.json) |
+| `k3_elementary` | K–3 elementary | 20 | [`data/math_problems_k3_elementary.json`](data/math_problems_k3_elementary.json) |
 
-The main metric is strict accuracy against `expected_answer`, usually comparing `response.final_answer.value`.
+The active sample contains 40 problems with paired Guarani and Spanish statements
+and an answer key. Models receive one language at a time; they do not receive the
+paired statement or expected answer. The `reasoning_type` condition uses one
+consistent category label per problem. These Guarani labels and all other Guarani
+prompt text have been reviewed by a native Guarani speaker.
 
-## Prompts
+### Models and providers
 
-The source prompts are in [`prompts/guarani_math_prompts.json`](prompts/guarani_math_prompts.json).
-
-We also export Markdown versions for review or sharing:
-
-| File | Contents |
-|---|---|
-| [`prompts/prompts_v1_v9_para_equipo.md`](prompts/prompts_v1_v9_para_equipo.md) | Prompts `v1` to `v9` used in initial tests and Azure/Gemini comparisons. |
-| [`prompts/prompts_v4_v7_para_equipo.md`](prompts/prompts_v4_v7_para_equipo.md) | Comparison subset of prompts `v4` to `v7`. |
-| [`prompts/prompts_eem_eeb.md`](prompts/prompts_eem_eeb.md) | Final secondary education and EEB prompts: `em_v1`, `em_v2`, `v10`, `v11`. |
-| [`prompts/chatgpt_manual_blind_v5.md`](prompts/chatgpt_manual_blind_v5.md) | Prompt for manual blind evaluation with ChatGPT/GPT. |
-
-| Prompt | Purpose | Description |
+| Study model | Provider route | Deployment / model ID setting |
 |---|---|---|
-| `v1` to `v4` | Primary education | Initial prompts with different interpretation, explanation, and JSON formatting strategies. |
-| `v5` | Primary education | Strict Guaraní with reinforced JSON rules. |
-| `v6` | Primary education | Warmup/few-shot variant based on `v5`. |
-| `v7` | Primary education | Warmup/few-shot variant based on `v4`. |
-| `v8` | Primary education | Simple zero-shot autocomplete, numeric result only. |
-| `v9` | Primary education | Simple few-shot autocomplete, numeric result only. |
-| `em_v1` | Secondary education | Guaraní problem without `reasoning_type`. |
-| `em_v2` | Secondary education | Guaraní problem with `reasoning_type`. |
-| `v10` | EEB Grade 3 | Guaraní problem without `reasoning_type`. |
-| `v11` | EEB Grade 3 | Guaraní problem with `reasoning_type`. |
+| Gemini 3.5 Flash | Gemini API, OpenAI-compatible chat endpoint | `GEMINI_MODEL_ID` |
+| Grok 4.1 | Azure AI Services | `AZURE_GROK41_DEPLOYMENT` |
+| GPT-4o mini | Azure OpenAI | `AZURE_GPT4O_MINI_DEPLOYMENT` |
+| Llama 3.3 70B | Azure AI Services | `AZURE_LLAMA33_DEPLOYMENT` |
+| Mistral Large 3 | Azure AI Services | `AZURE_MISTRAL_LARGE3_DEPLOYMENT` |
 
-## Models
+Before inference starts, the runner looks up the selected models’ published metadata.
+For Gemini it calls the Gemini Models API; for Azure it reads the deployment details
+through Azure CLI and Azure Resource Manager. It records the discovered version, the
+provider model name, lookup source/status, and a fresh `model_metadata_checked_at_utc`
+timestamp in every request record. It also records the API-returned model ID when
+available, endpoint/API settings, SDK version, decoding settings, request/completion
+timestamps, response metadata, and dataset/prompt hashes. A provider may omit a
+version; in that case the record states `version_not_returned` and retains the model
+name/deployment ID.
 
-### Azure / GuaranIA Chat Completions
+### Prompt conditions
 
-These models are run from [`test_models.py`](test_models.py):
+All seven prompt conditions are crossed with all 40 items, both languages, and all
+five models. Every prompt includes the same age-neutral mathematics-teacher role
+framing; this is shared context, not a separate condition. Conditions share the same
+JSON answer schema and do not specify an age or grade.
 
-| Model |
-|---|
-| `gpt-5.4-mini` |
-| `gpt-4.1` |
-| `gpt-4o-mini` |
-| `grok-4-1-fast-non-reasoning` |
-| `Mistral-Large-3` |
-| `Llama-3.3-70B-Instruct` |
-
-### Azure Services Responses API
-
-These models are run with [`run_azure_services_responses_tests.py`](run_azure_services_responses_tests.py) or the combined secondary education/EEB runner:
-
-| Model |
-|---|
-| `gpt-5.6-terra` |
-| `gpt-5.5` |
-
-### Gemini
-
-Gemini experiments are run with [`run_gemini_tests.py`](run_gemini_tests.py):
-
-| Model |
-|---|
-| `gemini-3.1-pro-preview` |
-| `gemini-3.5-flash` |
-| `gemini-3-flash-preview` |
-| `gemini-3.1-flash-lite` |
-| `gemini-3.5-live-translate-preview` |
-
-### Manual Evaluations
-
-Manual/blind GPT and Claude/Sonnet result files were also evaluated, with consolidated reports in:
-
-| Provider | Report |
+| Condition ID | Intervention |
 |---|---|
-| GPT | [`reports/gpt/resumen_gpt_v5.md`](reports/gpt/resumen_gpt_v5.md) |
-| Claude/Sonnet | [`reports/claude/resumen_claude_v5.md`](reports/claude/resumen_claude_v5.md) |
+| `minimal` | Simple request to solve the problem |
+| `standard` | Identify givens and question, choose a method, check the answer |
+| `cross_language_pivot` | Internally use the counterpart language, then answer in the input language |
+| `semantic_interpretation` | Interpret meaning and context rather than translate literally |
+| `vocabulary_aid` | Add a bilingual, language-appropriate glossary |
+| `few_shot` | Show the same two worked examples in each language |
+| `reasoning_type` | Provide a consistent math-category hint |
 
-## Scripts
+The prompt set is in [`prompts/benchmark_prompts.json`](prompts/benchmark_prompts.json). The answer contract requests JSON with `reasoning`, `steps`, and `final_answer.value`; numeric, structured, and symbolic answer values are allowed. The minimal condition changes the task instruction only; the shared response contract is retained for comparable scoring.
 
-| Script | Purpose |
-|---|---|
-| [`test_models.py`](test_models.py) | Azure chat client/model configuration and API key helpers. |
-| [`run_azure_prompt_tests.py`](run_azure_prompt_tests.py) | Runs Azure chat models with specific prompts. |
-| [`run_azure_services_responses_tests.py`](run_azure_services_responses_tests.py) | Runs `gpt-5.6-terra` and `gpt-5.5` through the Azure Services Responses API. |
-| [`run_gemini_tests.py`](run_gemini_tests.py) | Runs Gemini models through an OpenAI-compatible endpoint. |
-| [`run_education_media_tests.py`](run_education_media_tests.py) | Combined runner for datasets with `problem_gn`, `problem_es`, and `reasoning_type`. |
-| [`evaluate_prompt_results.py`](evaluate_prompt_results.py) | General evaluator for primary education results/classic prompts. |
-| [`evaluate_education_media_results.py`](evaluate_education_media_results.py) | Flexible evaluator for secondary education and EEB. |
+### Run size
 
-## Reports
+The complete design plans **2,800 model requests**: 40 problems × 2 languages × 7 prompt conditions × 5 models. The runner makes one request per cell, disables SDK retries, records failures, and does not automatically retry. Any deliberate reruns should use a separate output file and be documented; do not silently replace failed records.
 
-### Primary Education and Prompts `v1` to `v9`
+### Outcomes and statistical analysis
 
-| Report | Contents |
-|---|---|
-| [`reports/azure/prompts_y_resultados_v1_v4.md`](reports/azure/prompts_y_resultados_v1_v4.md) | Initial comparison of prompts `v1` to `v4`. |
-| [`reports/azure/prompt_comparison_v1_v4.md`](reports/azure/prompt_comparison_v1_v4.md) | Summary comparison of initial prompts. |
-| [`reports/azure/azure_v4_v9_team_comparison.md`](reports/azure/azure_v4_v9_team_comparison.md) | Comparison of prompts `v4` to `v9` on Azure models. |
-| [`reports/azure_services/summary_new_vs_existing_models.md`](reports/azure_services/summary_new_vs_existing_models.md) | Comparison of new models `gpt-5.5` and `gpt-5.6-terra` against earlier models. |
-| [`reports/azure_services/azure_all_models_v4_v9_simple.md`](reports/azure_services/azure_all_models_v4_v9_simple.md) | Simple table of all Azure models with prompts `v4` to `v9`. |
+The primary outcome is exact/correct answer accuracy from `final_answer.value`. Numeric answers use absolute tolerance `1e-4`; structured answers are compared component by component; symbolic expressions are compared with SymPy when available. The evaluator does not extract arbitrary numbers from explanatory prose. Invalid/missing answers and failed requests count as incorrect.
 
-### Secondary Education
+Reports provide accuracy by dataset, language, model, and prompt condition with 95% Wilson intervals. Paired Spanish–Guarani comparisons match the same problem, model, and prompt and use exact two-sided McNemar tests. Prompt comparisons pair each condition against `standard` on the same problem, model, and language. Holm adjustment controls family-wise error within each report comparison family. Prompt-by-dataset findings are exploratory because each dataset has only 10–20 items; confidence intervals and p-values do not remove that limitation.
 
-| Report | Contents |
-|---|---|
-| [`reports/educacion_media/education_media_2do_anio_em_v1_em_v2_report.md`](reports/educacion_media/education_media_2do_anio_em_v1_em_v2_report.md) | Evaluation of `data/problemas_matematicos_2do_año.json` with `em_v1` and `em_v2`. |
+## Getting started
 
-Main result: `gpt-5.5` and `gpt-5.6-terra` reached `10/10` with `em_v2` after the evaluator was adjusted to accept valid equivalent answers.
+### 1. Set up Python
 
-### EEB Grade 3
+Use Python 3.10 or newer. For Azure version discovery, install the Azure CLI and run
+`az login` with read access to the deployment resource. From the repository root:
 
-| Report | Contents |
-|---|---|
-| [`reports/eeb/eeb_v10_v11_report.md`](reports/eeb/eeb_v10_v11_report.md) | Evaluation of `data/problemas_matematicos_3er_grado.json` with `v10` and `v11`. |
-
-Main result: `gpt-5.5` reached `20/20` with both `v10` and `v11`. For most models, `v11` clearly improved on `v10`, suggesting that `reasoning_type` is especially helpful for less robust models.
-
-### Gemini
-
-| Report | Contents |
-|---|---|
-| [`reports/gemini/resumen_gemini_v1_v5.md`](reports/gemini/resumen_gemini_v1_v5.md) | Overall Gemini summary with prompts `v1` to `v5`. |
-| [`reports/gemini/prompts_y_resultados_gemini_v1_v5.md`](reports/gemini/prompts_y_resultados_gemini_v1_v5.md) | Details of Gemini prompts and results. |
-
-Highlighted results:
-
-| Model | Best prompt | Result |
-|---|---|---:|
-| `gemini-3.5-flash` | `v4` | 10/10 |
-| `gemini-3.1-pro-preview` | `v5` | 10/10 |
-| `gemini-3-flash-preview` | `v3` | 8/10 |
-| `gemini-3.1-flash-lite` | `v3` | 6/10 |
-
-## Example Commands
-
-### Secondary Education
-
-```powershell
-python run_education_media_tests.py --problems "data/problemas_matematicos_2do_año.json" --limit 10 --prompt-id em_v1 em_v2 --output "results/educacion_media/model_test_results_2do_anio_em_v1_em_v2.jsonl"
-python evaluate_education_media_results.py --input "results/educacion_media/model_test_results_2do_anio_em_v1_em_v2.jsonl" --output "reports/educacion_media/education_media_2do_anio_em_v1_em_v2_report.md"
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
 ```
 
-### EEB Grade 3
+### 2. Configure provider access
 
-```powershell
-python run_education_media_tests.py --problems "data/problemas_matematicos_3er_grado.json" --limit 20 --prompt-id v10 v11 --output "results/eeb/model_test_results_3er_grado_v10_v11.jsonl"
-python evaluate_education_media_results.py --input "results/eeb/model_test_results_3er_grado_v10_v11.jsonl" --output "reports/eeb/eeb_v10_v11_report.md"
+Copy `.env.example` to `.env` and fill in the credentials and deployment settings for your accounts. Keep `.env` private and do not commit it.
+
+Required credentials:
+
+- `GEMINI_API_KEY` for Gemini.
+- `AZURE_OPENAI_API_KEY` for Azure inference.
+- Azure CLI sign-in (`az login`) with permission to read the account and its model deployments; this separate management-plane access is used only for version lookup. If the intended subscription is not active, set optional `AZURE_SUBSCRIPTION_ID`.
+
+Endpoint and deployment variables have defaults for the configured GuaranIA resource; override them only if your deployment names or endpoints differ. `AZURE_OPENAI_API_VERSION` applies to GPT-4o mini. The runner uses one Azure inference key for the configured Azure endpoints. Confirm the endpoint and deployments are accessible. Never put a credential in a command-line argument or results file.
+
+### 3. Validate the full study without making calls
+
+```bash
+python -m src.run_benchmark --dry-run
 ```
 
-## .env
+The dry run validates all selected dataset-language-condition combinations and prints the planned request count and routing configuration. It makes zero provider calls and does not require credentials. During a real run, read-only metadata lookups happen before any inference requests; a failed lookup stops the run before paid model calls. The expected count for the default full design is 2,800. To review generated instructions:
 
-The runners expect API keys in environment variables or a local `.env` file.
+```bash
+python -m src.run_benchmark --dry-run --show-prompts
+```
 
-| Variable | Purpose |
-|---|---|
-| `AZURE_OPENAI_API_KEY` | Azure Services Responses API for `gpt-5.6-terra` and `gpt-5.5`. |
-| `GEMINI_API_KEY` | Gemini OpenAI-compatible endpoint. |
+Check that the deployment IDs are correct, all Guarani instructions and labels have been reviewed, and the planned count is 2,800 before the paid run.
+
+## Reproduce the experiments
+
+### Guarani and Spanish comparison
+
+The default command runs all five models, all 40 problems, both languages, and all seven conditions. It produces a new timestamped JSONL file directly under `results/`.
+
+```bash
+python -m src.run_benchmark
+```
+
+This command makes paid API calls and is expected to create up to 2,800 requests. A run can be narrowed for a deliberate subset using `--datasets`, `--models`, `--languages`, and `--conditions`; for example:
+
+```bash
+python -m src.run_benchmark --datasets elementary --models gemini-3.5-flash --languages gn es --conditions standard
+```
+
+Subset runs are not the complete study and must be described as such. The JSONL output stores one record per attempted request. Set a separate output path to keep intentional reruns distinct:
+
+```bash
+python -m src.run_benchmark --output results/pilot.jsonl
+```
+
+### Prompt comparison
+
+Prompt comparisons use the same all-crossed run above. Each problem is evaluated under all seven conditions, in both languages, with all five models. To execute only prompt comparisons for a subset, specify multiple condition IDs and preserve the `standard` condition as the paired baseline, for example:
+
+```bash
+python -m src.run_benchmark --conditions standard minimal cross_language_pivot semantic_interpretation vocabulary_aid few_shot reasoning_type
+```
+
+### Generate the report
+
+Use the path printed by the runner (or the explicit JSONL path) as report input:
+
+```bash
+python -m src.report_benchmark --input results/run_YYYYMMDDTHHMMSSffffffZ.jsonl
+```
+
+By default, the Markdown report is saved directly in `reports/` with a matching filename. Choose a custom destination with `--output`. The report contains the accuracy tables, paired-language tests, prompt-versus-standard tests, confidence intervals, and Holm-adjusted p-values.
+
+## Reproducibility record
+
+For each run, retain the JSONL output and note the repository commit, Python version, run date, provider account/deployment configuration, and any rerun decisions. Every request record contains a UTC access timestamp and completion timestamp, configured model/deployment identifiers, discovered version metadata and its UTC check time, endpoint/API settings, temperature and token limit, SDK retry setting, provider response metadata, and data/prompt hashes. The prompt-set version and file hash identify the exact prompt definitions. Provider-returned IDs or version metadata may not disclose private checkpoint/build details.
+
+The active runner uses temperature `0` and a maximum of `2048` output tokens by default. It refuses to overwrite an existing output path; use a fresh path for each run. The code does not automatically retry failed calls.
+
+## Repository map
+
+- `data/`: active bilingual problem datasets and answer keys.
+- `prompts/benchmark_prompts.json`: seven prompt conditions, glossary, examples, and reasoning-type labels.
+- `src/run_benchmark.py`: model request runner.
+- `src/report_benchmark.py`: accuracy and paired statistical report generator.
+- `src/math_evaluation.py`: answer extraction and mathematical equivalence checks.
+- `results/`: run JSONL files.
+- `reports/`: generated Markdown reports.

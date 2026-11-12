@@ -5,6 +5,7 @@ import re
 from collections import defaultdict
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
+from src.math_evaluation import evaluate as evaluate_math_row
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -181,18 +182,12 @@ def values_match(expected, actual):
 
 
 def evaluate_row(row):
-    parsed_response = row.get("response")
-    recovered_response = parsed_response or extract_json_from_raw(row.get("raw_response"))
-    expected = row.get("expected_answer")
-    predicted = final_answer_value(recovered_response)
-    if predicted is None:
-        predicted = extract_numeric_from_raw(row.get("raw_response"))
-    correct = row.get("error") is None and values_match(expected, predicted)
+    result = evaluate_math_row(row)
     return {
-        "correct": correct,
-        "json_valid": isinstance(parsed_response, dict) and row.get("json_parse_error") is None,
-        "expected": expected,
-        "predicted": predicted,
+        "correct": result["correct"],
+        "json_valid": result["json_valid"],
+        "expected": row.get("expected_answer"),
+        "predicted": result["predicted"],
     }
 
 

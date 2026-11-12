@@ -2,7 +2,7 @@ import json
 from collections import defaultdict
 from pathlib import Path
 
-from evaluate_prompt_results import average, evaluate_row, percentage
+from src.evaluate_prompt_results import average, evaluate_row, percentage
 
 
 BASE_DIR = Path(__file__).resolve().parent

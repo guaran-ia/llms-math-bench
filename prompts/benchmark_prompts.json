@@ -1,0 +1,232 @@
+{
+  "version": "guarani-math-prompt-set-1.0",
+  "review_status": "Guarani prompt text, glossary, examples, and reasoning labels require review by a fluent Guarani mathematics educator before paid runs.",
+  "answer_contract": {
+    "gn": "Embohovái Guaraníme. Emondo peteĩ JSON añónte, ko'ã campo reheve: reasoning (mombe'u mbyky), steps (lista de pasos), final_answer (objeto oguerekóva value). Value ikatu ha'e papapy, lista, mba'e mba'e rehegua térã ecuación.",
+    "es": "Responde en español. Devuelve solo un objeto JSON con estos campos: reasoning (explicación breve), steps (lista de pasos) y final_answer (objeto con value). Value puede ser un número, una lista, un objeto o una ecuación."
+  },
+  "conditions": [
+    {
+      "id": "minimal",
+      "name": "Minimal instruction",
+      "instruction": {
+        "gn": "Embohovái ko problema matemática.",
+        "es": "Resuelve este problema matemático."
+      }
+    },
+    {
+      "id": "standard",
+      "name": "Standard baseline",
+      "instruction": {
+        "gn": "Elee porandu porã. Ehecha mba'épa reikuaa ha mba'épa reporandu. Eiporavo mba'éichapa rejapóta ha ehecha jey ne mbohovái.",
+        "es": "Lee el problema con atención. Identifica los datos y qué se pregunta, elige cómo resolverlo y comprueba la respuesta."
+      }
+    },
+    {
+      "id": "cross_language_pivot",
+      "name": "Cross-language pivot",
+      "instruction": {
+        "gn": "Ne akãme, embohasa ko porandu castellano-pe ha esolve. Embohovái guaraníme, ha emyesakã mbykymi guaraníme. Ani rehechauka pe ñembohasa.",
+        "es": "Reformula mentalmente el problema en guaraní y resuélvelo. Responde en español con una explicación breve. No muestres la reformulación."
+      }
+    },
+    {
+      "id": "semantic_interpretation",
+      "name": "Semantic interpretation",
+      "instruction": {
+        "gn": "Eñeha'ã eikuaa porã mba'épa he'ise pe problema. Ani embohasa ñe'ẽ peteĩteĩ; eiporu pe contexto eikuaa hag̃ua mba'épa ojerure.",
+        "es": "Interpreta el sentido del problema en contexto. No traduzcas palabra por palabra; determina qué situación describe y qué pregunta."
+      }
+    },
+    {
+      "id": "vocabulary_aid",
+      "name": "Vocabulary aid",
+      "instruction": {
+        "gn": "Eiporu ko ñe'ẽryru bilingüe oipytyvõ hag̃ua ndéve reinterpreta hag̃ua ñe'ẽ matemático ha ñe'ẽ ojeporúva problema-pe:",
+        "es": "Usa este glosario bilingüe como apoyo para interpretar vocabulario matemático y expresiones del problema:"
+      }
+    },
+    {
+      "id": "few_shot",
+      "name": "Few-shot examples",
+      "instruction": {
+        "gn": "Ehecha ko'ã techapyrã rehecha hag̃ua mba'éichapa oñesoluciona. Ani reiporu jey umi número térã respuesta; esolve pe problema pyahu ndejehegui.",
+        "es": "Observa estos ejemplos como guía del formato de resolución. No reutilices sus números ni respuestas; resuelve el problema nuevo desde cero."
+      }
+    },
+    {
+      "id": "reasoning_type",
+      "name": "Reasoning-type hint",
+      "instruction": {
+        "gn": "Ko etiqueta ohechauka pe tipo de razonamiento ikatúva nepytyvõ. Eiporu peteĩ pista ramo, ha esolve pe problema oñeme'ẽva reheve:",
+        "es": "Esta etiqueta indica el tipo de razonamiento que puede ayudar. Úsala como pista y resuelve a partir del enunciado:"
+      }
+    }
+  ],
+  "glossary": {
+    "gn": [
+      "peteĩ = 1",
+      "mokõi = 2",
+      "mbohapy = 3",
+      "irundy = 4",
+      "po = 5",
+      "mokõipa = 20",
+      "poteĩpa = 60",
+      "peteĩteĩ = cada uno",
+      "mokõi jey = dos veces",
+      "irundy jey = cuatro veces",
+      "hetave = más que",
+      "hemby = sobra o queda"
+    ],
+    "es": [
+      "uno = peteĩ",
+      "dos = mokõi",
+      "tres = mbohapy",
+      "cuatro = irundy",
+      "cinco = po",
+      "veinte = mokõipa",
+      "sesenta = poteĩpa",
+      "cada uno = peteĩteĩ",
+      "dos veces = mokõi jey",
+      "cuatro veces = irundy jey",
+      "más que = hetave",
+      "queda o sobra = hemby"
+    ]
+  },
+  "few_shot_examples": {
+    "gn": [
+      {
+        "problem": "Areko 8 ha amoĩve 5. Mboypa oiko oñondive?",
+        "reasoning": "8 + 5 = 13.",
+        "steps": [
+          "Amoĩ 8 rehe 5."
+        ],
+        "value": 13
+      },
+      {
+        "problem": "Oĩ 4 aty ha peteĩteĩme oĩ 3. Mboypa oĩ oñondive?",
+        "reasoning": "4 × 3 = 12.",
+        "steps": [
+          "Aipapa 3 jey 4."
+        ],
+        "value": 12
+      }
+    ],
+    "es": [
+      {
+        "problem": "Tengo 8 y agrego 5. ¿Cuánto hay en total?",
+        "reasoning": "8 + 5 = 13.",
+        "steps": [
+          "Sumo 5 a 8."
+        ],
+        "value": 13
+      },
+      {
+        "problem": "Hay 4 grupos con 3 elementos en cada uno. ¿Cuántos elementos hay en total?",
+        "reasoning": "4 × 3 = 12.",
+        "steps": [
+          "Multiplico 4 por 3."
+        ],
+        "value": 12
+      }
+    ]
+  },
+  "reasoning_type_labels": {
+    "multiplicacion_y_suma": {
+      "es": "multiplicación y suma",
+      "gn": "jepapa ha mbojo'a"
+    },
+    "multiplicacion_y_resta": {
+      "es": "multiplicación y resta",
+      "gn": "jepapa ha guejy"
+    },
+    "proporcionalidad_directa": {
+      "es": "proporcionalidad directa",
+      "gn": "proporcionalidad directa"
+    },
+    "multiplicacion_multietapa": {
+      "es": "multiplicación en varias etapas",
+      "gn": "jepapa heta tembiapópe"
+    },
+    "operaciones_combinadas_tiempo": {
+      "es": "operaciones combinadas con tiempo",
+      "gn": "tembiapo papapy rehegua aravo reheve"
+    },
+    "suma_y_multiplicacion": {
+      "es": "suma y multiplicación",
+      "gn": "mbojo'a ha jepapa"
+    },
+    "secuencia_y_porcentaje": {
+      "es": "secuencia y porcentaje",
+      "gn": "secuencia ha porcentaje"
+    },
+    "multiplicacion_varios_factores": {
+      "es": "multiplicación de varios factores",
+      "gn": "jepapa heta papapy reheve"
+    },
+    "proporcionalidad_multiplicativa": {
+      "es": "relación multiplicativa en cadena",
+      "gn": "proporcionalidad multiplicativa"
+    },
+    "suma_de_productos": {
+      "es": "suma de productos",
+      "gn": "mbojo'a jepapa rire"
+    },
+    "logaritmos": {
+      "es": "logaritmos",
+      "gn": "logaritmo"
+    },
+    "matrix_addition": {
+      "es": "suma de matrices",
+      "gn": "mbojo'a de matrices"
+    },
+    "determinant": {
+      "es": "determinantes",
+      "gn": "determinante"
+    },
+    "circle_equation": {
+      "es": "ecuación de circunferencia",
+      "gn": "ecuación de circunferencia"
+    },
+    "circle_equation_from_diameter": {
+      "es": "circunferencia a partir del diámetro",
+      "gn": "circunferencia diámetro rehegua"
+    },
+    "line_intersection_circle": {
+      "es": "intersección de rectas y circunferencia",
+      "gn": "recta ojoaju ha circunferencia"
+    },
+    "circle_center_radius": {
+      "es": "centro y radio de circunferencia",
+      "gn": "mbyte ha radio de circunferencia"
+    },
+    "parabola_vertex": {
+      "es": "vértice de parábola",
+      "gn": "vértice de parábola"
+    },
+    "distance_difference": {
+      "es": "diferencia de distancia",
+      "gn": "diferencia de distancia"
+    },
+    "division": {
+      "es": "división",
+      "gn": "japoja'o"
+    },
+    "division_and_subtraction": {
+      "es": "división y resta",
+      "gn": "japoja'o ha guejy"
+    },
+    "multiplication": {
+      "es": "multiplicación",
+      "gn": "jepapa"
+    },
+    "subtraction": {
+      "es": "resta",
+      "gn": "guejy"
+    }
+  },
+  "role_instruction": {
+    "gn": "Nde ha’e peteĩ mbo’ehára matemática rehegua.",
+    "es": "Eres profesor de matemáticas."
+  }
+}

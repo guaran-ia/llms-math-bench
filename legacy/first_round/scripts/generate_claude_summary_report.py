@@ -2,7 +2,7 @@ import json
 import re
 from pathlib import Path
 
-from evaluate_prompt_results import evaluate_row, percentage
+from src.evaluate_prompt_results import evaluate_row, percentage
 
 
 BASE_DIR = Path(__file__).resolve().parent
