@@ -1,4 +1,4 @@
-# Guarani Mathematical Reasoning Benchmark
+# Guarani Mathematical Reasoning Study
 
 This study compares how five language models solve a set of 40 mathematics problems
 when presented in Guarani or Spanish. It also measures the effects of seven prompt
